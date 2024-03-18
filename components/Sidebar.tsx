@@ -5,10 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-function Sidebar() {
+function Sidebar({ className }: { className?: string }) {
   const pathName = usePathname();
   return (
-    <div className="col-span-1 hidden lg:block  py-4 border-r-2 px-5">
+    <div
+      className={cn(
+        "col-span-1 h-full lg:block  py-4 border-r-2 px-5",
+        className
+      )}
+    >
       <div className="flex w-full gap-6 flex-col">
         {sideBarLinks.map((link) => (
           <Link

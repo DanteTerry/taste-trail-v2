@@ -5,7 +5,7 @@ function UserProfile() {
   return (
     <div className="w-[40px] h-[40px]">
       <Image
-        src={"/profile.png"}
+        src={"/icons/profile.png"}
         width={0}
         height={0}
         alt="avatar"

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import "./globals.css";
+import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
 import Cart from "@/components/Cart";
-import { cn } from "@/lib/utils";
+import "./globals.css";
 
 const spaceSpace_Grotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -25,12 +25,12 @@ export default function RootLayout({
 }>) {
   const cart = "";
   return (
-    <html lang="en" className="h-full">
-      <body className={`${spaceSpace_Grotesk.className} h-full`}>
+    <html lang="en">
+      <body className={`${spaceSpace_Grotesk.className}`}>
         <Header />
         <MobileNav />
-        <main className="grid grid-cols-12 h-full">
-          <Sidebar />
+        <main className="grid grid-cols-12">
+          <Sidebar className="hidden" />
           <section
             className={cn("col-span-8", !cart && "lg:col-span-11 col-span-12")}
           >
