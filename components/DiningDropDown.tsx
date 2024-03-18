@@ -12,7 +12,7 @@ function DiningDropDown() {
   return (
     <div className="hidden md:flex">
       <Select>
-        <SelectTrigger className="w-[150px] outline-none border border-primary text-primary">
+        <SelectTrigger className="w-[150px] outline-none border font-semibold border-primary text-primary">
           <SelectValue placeholder={"Dinning Option"} />
         </SelectTrigger>
         <SelectContent className="text-primary">

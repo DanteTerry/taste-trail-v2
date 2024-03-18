@@ -1,6 +1,5 @@
 import Image from "next/image";
 import DiningDropDown from "./DiningDropDown";
-import HeaderTime from "./HeaderTime";
 import NavLinks from "./NavLinks";
 import UserProfile from "./UserProfile";
 import Link from "next/link";

@@ -25,16 +25,16 @@ export default function RootLayout({
 }>) {
   const cart = "";
   return (
-    <html lang="en">
-      <body className={`${spaceSpace_Grotesk.className}`}>
+    <html lang="en" className="h-full">
+      <body className={`${spaceSpace_Grotesk.className} h-full`}>
         <Header />
         <MobileNav />
-        <main className="grid grid-cols-12">
-          <Sidebar className="hidden" />
+        <main className="grid grid-cols-12 h-full">
+          <Sidebar className="hidden h-full" />
           <section
             className={cn(
               "col-span-8 p-4",
-              !cart && "lg:col-span-11 col-span-12"
+              !cart && "lg:col-span-11 col-span-12 h-full"
             )}
           >
             {children}

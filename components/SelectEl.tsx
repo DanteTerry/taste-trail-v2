@@ -14,7 +14,7 @@ function SelectEl({
 }) {
   return (
     <Select>
-      <SelectTrigger className="w-full outline-none border border-primary text-primary">
+      <SelectTrigger className="w-full outline-none border font-semibold border-primary text-primary">
         <SelectValue placeholder={option.placeHolder} />
       </SelectTrigger>
       <SelectContent>
