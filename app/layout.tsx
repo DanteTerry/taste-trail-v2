@@ -25,11 +25,11 @@ export default function RootLayout({
 }>) {
   const cart = "";
   return (
-    <html lang="en" className="h-full">
+    <html lang="en">
       <body className={`${spaceSpace_Grotesk.className} h-full`}>
         <Header />
         <MobileNav />
-        <main className="grid grid-cols-12 h-full">
+        <main className="grid grid-cols-12">
           <Sidebar className="hidden h-full" />
           <section
             className={cn(
