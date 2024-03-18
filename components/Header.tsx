@@ -11,8 +11,8 @@ import Sidebar from "./Sidebar";
 
 function Header() {
   return (
-    <header className="flex w-full justify-between z-50 p-4 py-3 border-b-2">
-      <div className="block md:hidden">
+    <header className="flex items-center w-full justify-between z-50 p-4 py-3 border-b-2">
+      <div className="flex items-center md:hidden ">
         <Sheet>
           <SheetTrigger>
             <Menu size={"30px"} />

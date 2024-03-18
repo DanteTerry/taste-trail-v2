@@ -32,7 +32,10 @@ export default function RootLayout({
         <main className="grid grid-cols-12">
           <Sidebar className="hidden" />
           <section
-            className={cn("col-span-8", !cart && "lg:col-span-11 col-span-12")}
+            className={cn(
+              "col-span-8 p-4",
+              !cart && "lg:col-span-11 col-span-12"
+            )}
           >
             {children}
           </section>
