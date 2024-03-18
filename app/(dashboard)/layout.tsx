@@ -3,7 +3,7 @@ import React from "react";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <section>
+    <section className="w-full">
       <FindTaste />
       <section className="p-4">{children}</section>
     </section>

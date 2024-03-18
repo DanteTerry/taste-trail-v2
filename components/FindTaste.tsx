@@ -12,8 +12,8 @@ function FindTaste() {
   let pathName = usePathname();
   pathName = pathName.replace("/", "");
   return (
-    <section className="w-full px-4 border-t-0 md:border-b py-2 grid mx-auto gap-y-5 md:gap-x-10 md:grid-cols-2">
-      <div className="flex md:border-r border-b-2 md:border-b-0  items-center px-4  py-1  text-primary ">
+    <section className="w-full border-t-0 md:border-b py-2 flex flex-col items-center md:grid gap-y-5 md:gap-x-10 md:grid-cols-2">
+      <div className="flex w-full md:border-r border-b-2 md:border-b-0  items-center px-4  py-1  text-primary ">
         <Search size={"25"} />
         <input
           type="text"
@@ -22,7 +22,7 @@ function FindTaste() {
         />
       </div>
 
-      <div className="flex w-full gap-4 items-center">
+      <div className="flex w-full gap-1 md:gap-4 items-center">
         {selectOptions.map((option) => (
           <SelectEl option={option} key={option.placeHolder} />
         ))}

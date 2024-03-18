@@ -83,7 +83,7 @@ export const sideBarLinks: SideBarLinksProp[] = [
 
 export const selectOptions = [
   {
-    placeHolder: "Sort by",
+    placeHolder: "Sort",
     title: [
       "Popularity",
       "Rating: High to Low",

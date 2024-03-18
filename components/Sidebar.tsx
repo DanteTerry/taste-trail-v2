@@ -8,12 +8,7 @@ import React from "react";
 function Sidebar({ className }: { className?: string }) {
   const pathName = usePathname();
   return (
-    <div
-      className={cn(
-        "col-span-1 h-full lg:block  py-4 border-r-2 px-5",
-        className
-      )}
-    >
+    <div className={cn("col-span-1 lg:block  py-4 border-r-2 px-5", className)}>
       <div className="flex w-full gap-6 flex-col">
         {sideBarLinks.map((link) => (
           <Link
