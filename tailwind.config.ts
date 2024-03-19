@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        hero: 'url("/public/icons/hero.png")',
+      },
+      fontFamily: {
+        greek: "var(--font-greek)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -25,7 +31,7 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FF5C00",
+          DEFAULT: "#F95555",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

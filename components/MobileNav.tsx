@@ -6,7 +6,7 @@ import Link from "next/link";
 
 function MobileNav() {
   return (
-    <nav className="w-full flex md:hidden justify-between border-primary    absolute bottom-0">
+    <nav className="w-full flex md:hidden z-50 justify-between border-primary fixed bottom-0">
       {navLinks.map((link) => (
         <Button
           className="w-full rounded-none py-2"

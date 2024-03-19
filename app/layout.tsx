@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
@@ -26,14 +26,14 @@ export default function RootLayout({
   const cart = "";
   return (
     <html lang="en">
-      <body className={`${spaceSpace_Grotesk.className} h-full`}>
+      <body className={`${spaceSpace_Grotesk.className}  h-full`}>
         <Header />
         <MobileNav />
         <main className="grid grid-cols-12">
           <Sidebar className="hidden h-full" />
           <section
             className={cn(
-              "col-span-8 p-4",
+              "col-span-8",
               !cart && "lg:col-span-11 col-span-12 h-full"
             )}
           >

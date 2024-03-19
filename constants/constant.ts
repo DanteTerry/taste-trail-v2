@@ -109,3 +109,12 @@ export const selectOptions = [
     value: ["any", "3.5", "4.0", "4.5", "5"],
   },
 ];
+
+export const customerImg = [
+  "customer-1.jpg",
+  "customer-2.jpg",
+  "customer-3.jpg",
+  "customer-4.jpg",
+  "customer-5.jpg",
+  "customer-6.jpg",
+];
