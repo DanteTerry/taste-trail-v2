@@ -10,7 +10,7 @@ import Sidebar from "./Sidebar";
 
 function Header() {
   return (
-    <header className="flex items-center w-full justify-between z-50 p-4 py-3 border-b-2">
+    <header className="flex fixed bg-white top-0 items-center w-full justify-between z-50 p-4 py-3 border-b-2">
       <div className="flex items-center md:hidden ">
         <Sheet>
           <SheetTrigger>

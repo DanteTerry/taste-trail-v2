@@ -29,13 +29,10 @@ export default function RootLayout({
       <body className={`${spaceSpace_Grotesk.className}  h-full`}>
         <Header />
         <MobileNav />
-        <main className="grid grid-cols-12">
-          <Sidebar className="hidden h-full" />
+        <main className="">
+          <Sidebar className="hidden  lg:fixed lg:pt-20 bg-white h-full" />
           <section
-            className={cn(
-              "col-span-8",
-              !cart && "lg:col-span-11 col-span-12 h-full"
-            )}
+            className={cn("lg:pl-[128px]  pt-[100px]", !cart && "h-full")}
           >
             {children}
           </section>
