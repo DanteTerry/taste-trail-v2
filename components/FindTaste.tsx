@@ -22,7 +22,7 @@ function FindTaste() {
         />
       </div>
 
-      <div className="flex w-full gap-1 md:gap-4 items-center">
+      <div className="flex w-full gap-1 md:gap-4 px-3 items-center">
         {selectOptions.map((option) => (
           <SelectEl option={option} key={option.placeHolder} />
         ))}
