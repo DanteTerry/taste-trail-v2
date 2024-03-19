@@ -13,8 +13,8 @@ function Hero() {
         <p className="md:text-2xl">
           Your one-stop culinary destination, where you can delight in an
           exquisite array of flavors, from timeless classics to innovative
-          creations. Join us and elevate your dining experience to new heights,
-          all in one place.
+          creations. Join us and elevate your dining experience to new heights
+          in one place.
         </p>
 
         <div className="flex mb-5 gap-5">
