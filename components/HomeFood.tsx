@@ -21,16 +21,17 @@ function HomeFood() {
         We offer a wide range of cuisines
       </h2>
 
-      <div className="mt-5 w-full  md:mt-10 flex gap-8 justify-center items-center flex-wrap">
+      <div className="mt-5 w-full  md:mt-10 grid gap-x-5 gap-y-5 grid-cols-2  md:grid-cols-4">
         {cuisineImg.map((cuisine, index) => (
           <div key={index} className="relative flex justify-between">
             <Image
               key={index}
               src={`/icons/${cuisine}.jpg`}
               alt={cuisine}
-              height={200}
-              width={200}
-              className="rounded-lg"
+              height={0}
+              width={0}
+              sizes="100%"
+              className="w-full rounded-lg"
             />
 
             <p className="text-primary capitalize px-2 rounded-full absolute bottom-2 right-2 text-xl bg-white text-center font-semibold">

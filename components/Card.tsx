@@ -1,6 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 function Card({ img }: { img: string }) {
   return (
@@ -9,9 +17,11 @@ function Card({ img }: { img: string }) {
         <Image
           src={img}
           alt="food"
-          width={268}
-          height={178}
+          width={0}
+          sizes="100%"
+          height={0}
           className=" w-full h-full object-cover"
+          priority={true}
         />
       </div>
 
@@ -24,11 +34,26 @@ function Card({ img }: { img: string }) {
 
       <p className="text-justify px-2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        tempor incididunt ut labore et dolore magna.
       </p>
 
       <div className=" w-full px-2 mt-4">
-        <Button className="bg-primary w-full text-white">Add To cart</Button>
+        <Sheet>
+          <SheetTrigger className="w-full" asChild>
+            <Button className="bg-primary w-full text-white">
+              Add To cart
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Are you absolutely sure?</SheetTitle>
+              <SheetDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   );

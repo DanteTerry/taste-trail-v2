@@ -23,20 +23,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cart = "";
   return (
     <html lang="en">
-      <body className={`${spaceSpace_Grotesk.className}  h-full`}>
+      <body
+        className={`${spaceSpace_Grotesk.className} w-screen overflow-x-hidden`}
+      >
         <Header />
         <MobileNav />
         <main className="">
           <Sidebar className="hidden  lg:fixed lg:pt-20 bg-white h-full" />
-          <section
-            className={cn("lg:pl-[128px] pt-[100px]", !cart && "h-full")}
-          >
+          <section className={cn("lg:pl-[128px] pt-[100px]")}>
             {children}
           </section>
-          {cart && <Cart />}
         </main>
       </body>
     </html>

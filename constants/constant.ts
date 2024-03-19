@@ -119,4 +119,4 @@ export const customerImg = [
   "customer-6.jpg",
 ];
 
-export const cuisineImg = ["czech", "indian", "italian", "mexican", "japanese"];
+export const cuisineImg = ["czech", "indian", "italian", "japanese"];

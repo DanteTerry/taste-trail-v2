@@ -12,7 +12,7 @@ function FindTaste() {
   let pathName = usePathname();
   pathName = pathName.replace("/", "");
   return (
-    <section className="w-full border-t-0 md:border-b py-2 flex flex-col items-center md:grid gap-y-5 md:gap-x-10 md:grid-cols-2">
+    <section className="w-full md:px-4 border-t-0 md:border-b py-2 flex flex-col items-center md:grid gap-y-5 md:gap-x-10 md:grid-cols-2">
       <div className="flex w-full md:border-r border-b-2 md:border-b-0  items-center px-4  py-1  text-primary ">
         <Search size={"25"} />
         <input
