@@ -11,15 +11,14 @@ import {
 function DiningDropDown() {
   return (
     <div className="hidden md:flex">
-      <Select>
-        <SelectTrigger className="w-[150px] outline-none border font-semibold border-primary text-primary">
-          <SelectValue placeholder={"Dinning Option"} />
+      <Select defaultValue="EUR">
+        <SelectTrigger className="w-[150px] outline-none  border font-semibold border-primary text-primary">
+          <SelectValue placeholder={"Currency"} />
         </SelectTrigger>
         <SelectContent className="text-primary">
-          <SelectItem value={"Dine In"}>Dine In</SelectItem>
-          <SelectItem value={"Take Away"}>Take Away</SelectItem>
-          <SelectItem value={"Delivery"}>Delivery</SelectItem>
-          <SelectItem value={"Reservation"}>Reservation</SelectItem>
+          <SelectItem value={"EUR"}>Euro</SelectItem>
+          <SelectItem value={"CZK"}>Czech Koruna</SelectItem>
+          <SelectItem value={"INR"}>Indian Rupee</SelectItem>
         </SelectContent>
       </Select>
     </div>

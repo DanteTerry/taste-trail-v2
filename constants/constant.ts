@@ -4,12 +4,12 @@ import {
   Clock8,
   ShoppingBasket,
   Sandwich,
+  Pizza,
   Soup,
 } from "lucide-react";
 
 import { SiBuymeacoffee } from "react-icons/si";
 import { GiSlicedBread } from "react-icons/gi";
-import { GiWineBottle } from "react-icons/gi";
 import { IoFastFoodOutline } from "react-icons/io5";
 
 // Define an interface for navigation links
@@ -50,18 +50,8 @@ export const navLinks: NavLinkProps[] = [
 
 export const sideBarLinks: SideBarLinksProp[] = [
   {
-    href: "/coffee",
-    label: "Coffee",
-    icon: SiBuymeacoffee,
-  },
-  {
-    href: "/beverages",
-    label: "Beverages",
-    icon: GiWineBottle,
-  },
-  {
-    href: "/food",
-    label: "Food",
+    href: "/main",
+    label: "Main Course",
     icon: IoFastFoodOutline,
   },
   {
@@ -70,14 +60,24 @@ export const sideBarLinks: SideBarLinksProp[] = [
     icon: Soup,
   },
   {
+    href: "/sandwich",
+    label: "Sandwiches",
+    icon: Sandwich,
+  },
+  {
+    href: "/pizza",
+    label: "Pizzas",
+    icon: Pizza,
+  },
+  {
+    href: "/beverage",
+    label: "Beverages",
+    icon: SiBuymeacoffee,
+  },
+  {
     href: "/bread",
     label: "Bread",
     icon: GiSlicedBread,
-  },
-  {
-    href: "/snack",
-    label: "Snack",
-    icon: Sandwich,
   },
 ];
 
@@ -100,8 +100,8 @@ export const selectOptions = [
   },
   {
     placeHolder: "Cuisines",
-    title: ["Italian", "Mexican", "Chinese", "Indian", "Japanese", "Czech"],
-    value: ["italian", "mexican", "chinese", "indian", "japanese", "czech"],
+    title: ["Italian", "Mexican", "Indian", "Japanese", "Czech"],
+    value: ["italian", "mexican", "indian", "japanese", "czech"],
   },
   {
     placeHolder: "Rating",
@@ -118,3 +118,5 @@ export const customerImg = [
   "customer-5.jpg",
   "customer-6.jpg",
 ];
+
+export const cuisineImg = ["czech", "indian", "italian", "mexican", "japanese"];

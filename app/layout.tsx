@@ -32,7 +32,7 @@ export default function RootLayout({
         <main className="">
           <Sidebar className="hidden  lg:fixed lg:pt-20 bg-white h-full" />
           <section
-            className={cn("lg:pl-[128px]  pt-[100px]", !cart && "h-full")}
+            className={cn("lg:pl-[128px] pt-[100px]", !cart && "h-full")}
           >
             {children}
           </section>

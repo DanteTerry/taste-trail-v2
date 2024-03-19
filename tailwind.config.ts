@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       backgroundImage: {
-        hero: 'url("/public/icons/hero.png")',
+        hero: 'url("/icons/hero.png")',
       },
       fontFamily: {
         greek: "var(--font-greek)",
