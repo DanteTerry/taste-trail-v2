@@ -1,53 +1,41 @@
 "use client";
 
-import Image from "next/image";
-import React, { useState } from "react";
-import { Button } from "./ui/button";
+import CartItem from "./CartItem";
 
 function Cart() {
-  const [quantity, setQuantity] = useState(1);
-
-  const handleIncrement = () => {
-    setQuantity((prev) => prev + 1);
-  };
-
-  const handleDecrement = () => {
-    setQuantity((prev) => (prev === 1 ? prev : prev - 1));
-  };
-
   return (
     <div className="h-full p-4">
-      <h3 className="border-b-2 pb-2 text-xl font-semibold">Add Order</h3>
+      <h3 className="border-b-2 pb-2 text-xl font-semibold">
+        Add Order to cart
+      </h3>
 
-      <div className="mt-2 rounded-lg bg-neutral-100 p-4">
-        <div className="flex justify-between">
-          <div className="flex gap-3 ">
-            <Image
-              src={"/icons/indian.jpg"}
-              alt="Food"
-              height={100}
-              width={100}
-              className="rounded-lg"
-            />
+      <div className="flex  h-full flex-col justify-between">
+        <div className="mt-5 flex flex-col gap-5 rounded-lg border-b-2 bg-neutral-100 p-4 ">
+          <CartItem />
+          <CartItem />
+          <CartItem />
+        </div>
+        <div className="mt-5 w-full p-4 pb-14">
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between text-lg">
+              <h3 className="text-lg font-semibold text-black">Sub Total</h3>
+              <p className="font-semibold text-primary ">$ 45</p>
+            </div>
 
-            <div className="w-max">
-              <h4 className="text-lg font-semibold">Chicken Roll</h4>
-              <p className="text-sm text-gray-500">Indian</p>
+            <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
+              <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
+              <p className="font-semibold text-primary "> $ 5</p>
+            </div>
 
-              <h4 className=" text-lg font-semibold">Price</h4>
-              <p className="text-sm text-gray-500">$ 20</p>
+            <div className="mt-3 flex justify-between text-lg">
+              <h3 className="text-lg font-semibold text-black">Total</h3>
+              <p className="font-semibold text-primary "> $ 50</p>
             </div>
           </div>
 
-          <div className="flex w-[140px]  items-center justify-between self-end">
-            <Button className="text-2xl" onClick={handleDecrement}>
-              -
-            </Button>
-            <span className="text-lg font-semibold">{quantity}</span>
-            <Button onClick={handleIncrement} className="text-2xl">
-              +
-            </Button>
-          </div>
+          <button className="mt-5 w-full rounded-lg bg-primary p-3 text-white">
+            Checkout
+          </button>
         </div>
       </div>
     </div>
