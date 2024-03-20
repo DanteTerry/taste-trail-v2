@@ -18,10 +18,9 @@ function CartItem() {
         <Image
           src={"/icons/indian.jpg"}
           alt="Food"
-          width={0}
-          height={0}
-          sizes="100%"
-          className="h-[100px] w-[100px] rounded-lg md:h-[100px] md:w-[100px]"
+          width={100}
+          height={100}
+          className=" rounded-lg "
         />
 
         <div className="w-max">
@@ -36,19 +35,11 @@ function CartItem() {
       </div>
 
       <div className="flex w-[110px] items-center justify-between self-end">
-        <Button
-          size={"icon"}
-          className="rounded-full text-2xl"
-          onClick={handleDecrement}
-        >
+        <Button size={"sm"} className=" text-2xl" onClick={handleDecrement}>
           -
         </Button>
         <span className="text-xl font-semibold">{quantity}</span>
-        <Button
-          size={"icon"}
-          onClick={handleIncrement}
-          className="rounded-full text-2xl"
-        >
+        <Button size={"sm"} onClick={handleIncrement} className=" text-2xl">
           +
         </Button>
       </div>
