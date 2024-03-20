@@ -6,15 +6,15 @@ import Link from "next/link";
 
 function MobileNav() {
   return (
-    <nav className="w-full flex md:hidden z-50 justify-between border-primary fixed bottom-0">
+    <nav className="fixed bottom-0 z-50 flex w-full justify-between border-primary md:hidden">
       {navLinks.map((link) => (
         <Button
-          className="w-full rounded-none py-2"
+          className="h-[50px] w-full rounded-none py-5"
           key={link.href}
           size={"lg"}
           asChild
         >
-          <Link href={link.href} className="text-2xl">
+          <Link href={link.href} className="text-3xl">
             <link.icon />
           </Link>
         </Button>
