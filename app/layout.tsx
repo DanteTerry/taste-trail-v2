@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Poppins } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
-import Cart from "@/components/Cart";
+import { Toaster } from "@/components/ui/sonner";
+
 import "./globals.css";
 
 const spaceSpace_Grotesk = Space_Grotesk({
@@ -30,12 +31,13 @@ export default function RootLayout({
       >
         <Header />
         <MobileNav />
-        <main className="">
-          <Sidebar className="hidden  lg:fixed lg:pt-20 bg-white h-full" />
-          <section className={cn("lg:pl-[128px] pt-[65px]")}>
+        <main>
+          <Sidebar className="hidden  h-full bg-white lg:fixed lg:pt-20" />
+          <section className={cn("pt-[65px] lg:pl-[128px]")}>
             {children}
           </section>
         </main>
+        <Toaster />
       </body>
     </html>
   );

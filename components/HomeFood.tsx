@@ -2,15 +2,21 @@ import React from "react";
 import Card from "./Card";
 import Image from "next/image";
 import { cuisineImg } from "@/constants/constant";
+import { getMenu } from "@/utils/menuRequestHandler";
+import { IMenuItem } from "@/types/types";
 
-function HomeFood() {
+async function HomeFood() {
+  const menuData = await getMenu();
+
+  const homeMenu = menuData.sort(() => Math.random() - 0.5).slice(0, 4);
+
   return (
-    <div className=" bg-neutral-100 py-10 md:px-16 p-4">
-      <h2 className="md:text-[2.4vw] mt-5 md:mt-10 text-center text-primary font-semibold leading-8 text-[5vw]">
+    <div className=" bg-neutral-100 p-4 py-10 md:px-16">
+      <h2 className="mt-5 text-center text-[5vw] font-semibold leading-8 text-primary md:mt-10 md:text-[2.4vw]">
         We offer a wide range of cuisines
       </h2>
 
-      <div className="mt-5 w-full  md:mt-10 grid gap-x-5 gap-y-5 grid-cols-2  md:grid-cols-4">
+      <div className="mt-5 grid  w-full grid-cols-2 gap-x-5 gap-y-5 md:mt-10  md:grid-cols-4">
         {cuisineImg.map((cuisine, index) => (
           <div key={index} className="relative flex justify-between">
             <Image
@@ -23,22 +29,21 @@ function HomeFood() {
               className="w-full rounded-lg"
             />
 
-            <p className="text-primary capitalize px-2 rounded-full absolute bottom-4 right-4 text-xl bg-white text-center font-semibold">
+            <p className="absolute bottom-4 right-4 rounded-full bg-white px-2 text-center text-xl font-semibold capitalize text-primary">
               {cuisine}
             </p>
           </div>
         ))}
       </div>
 
-      <h2 className="md:text-[2.4vw]  md:mt-16 mt-5 text-center text-primary font-semibold leading-8 text-[5vw]">
+      <h2 className="mt-5  text-center text-[5vw] font-semibold leading-8 text-primary md:mt-16 md:text-[2.4vw]">
         Try our popular dishes
       </h2>
 
-      <div className="mt-5  md:mt-8 flex gap-4 justify-center items-center flex-wrap">
-        <Card img={"/icons/food1.jpg"} />
-        <Card img={"/icons/food2.jpg"} />
-        <Card img={"/icons/food3.jpg"} />
-        <Card img={"/icons/food1.jpg"} />
+      <div className="mt-5  flex flex-wrap items-center justify-center gap-4 md:mt-8">
+        {homeMenu.map((menu: IMenuItem) => (
+          <Card key={menu._id} menuData={menu} />
+        ))}
       </div>
     </div>
   );

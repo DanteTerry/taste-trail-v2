@@ -10,14 +10,14 @@ import Sidebar from "./Sidebar";
 
 function Header() {
   return (
-    <header className="flex fixed bg-white top-0 w-screen items-center justify-between z-50 p-4 py-3 border-b-2">
+    <header className="fixed top-0 z-50 flex w-screen items-center justify-between border-b-2 bg-white p-4 ">
       <div className="flex items-center md:hidden ">
         <Sheet>
           <SheetTrigger>
             <Menu size={"30px"} />
           </SheetTrigger>
           <SheetContent side={"left"} className="w-2/4 md:hidden">
-            <Sidebar className="border-none px-0 h-full" />
+            <Sidebar className="h-full border-none px-0" />
           </SheetContent>
         </Sheet>
       </div>
@@ -29,7 +29,7 @@ function Header() {
         </Link>
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-5">
         <NavLinks />
         <DiningDropDown />
         {/* <HeaderTime /> */}
