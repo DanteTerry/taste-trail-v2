@@ -4,22 +4,22 @@ import { Button } from "./ui/button";
 
 function Hero() {
   return (
-    <section className="w-full h-screen  lg:h-[100vh] p-4  md:px-16 flex flex-col  lg:flex-row">
-      <div className=" flex flex-col lg:w-1/2 gap-3 md:gap-5 text-justify justify-center">
-        <h1 className="md:text-4xl text-3xl">
+    <section className="flex h-screen  w-full flex-col  p-4 md:px-16 lg:h-[100vh] lg:flex-row  lg:justify-center">
+      <div className=" flex flex-col justify-center gap-3 text-justify md:gap-5 lg:w-1/2">
+        <h1 className="text-3xl md:text-4xl">
           Welcome to <span className="text-primary">TasteTrail</span>
         </h1>
-        <p className=" text-xl md:-widest md:text-xl lg:pr-5">
+        <p className=" md:-widest text-xl md:text-xl lg:pr-5">
           Your one-stop culinary destination, where you can delight in an
           exquisite array of flavors, from timeless classics to innovative
           creations. Join us and elevate your dining experience to new heights
           in one place.
         </p>
 
-        <div className="flex mb-5 gap-5">
+        <div className="mb-5 flex gap-5">
           <Button
             size={"lg"}
-            className="bg-primary md:text-lg text-white py-3 px-8 rounded-lg"
+            className="rounded-lg bg-primary px-8 py-3 text-white md:text-lg"
           >
             Order Now
           </Button>
@@ -27,13 +27,13 @@ function Hero() {
           <Button
             size={"lg"}
             variant={"outline"}
-            className=" text-primary md:text-lg py-3 px-8 rounded-lg"
+            className=" rounded-lg px-8 py-3 text-primary md:text-lg"
           >
             Learn More
           </Button>
         </div>
       </div>
-      <div className="lg:w-1/2 flex items-start justify-center">
+      <div className="flex items-start justify-center lg:w-1/2">
         <Image
           src={"/icons/meals.png"}
           alt="food with plate"
