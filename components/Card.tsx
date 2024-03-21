@@ -1,11 +1,40 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
+import { useEffect, useState } from "react";
 
-function Card({ menuData }: { menuData: IMenuItem }) {
+interface CardProps {
+  menuData: IMenuItem;
+}
+
+function Card({ menuData }: CardProps) {
+  const [cart, setCart] = useState<IMenuItem[]>([]); // Corrected type for cart state
+
   const { name, image, price, description } = menuData;
+
+  function handleClick() {
+    const cartData = JSON.parse(localStorage.getItem("menuData") || "[]");
+
+    if (!cartData.find((item: IMenuItem) => item._id === menuData._id)) {
+      cartData.push(menuData);
+      localStorage.setItem("menuData", JSON.stringify(cartData));
+    } else {
+      console.log("Item already in cart");
+    }
+  }
+
+  useEffect(() => {
+    const getData = localStorage.getItem("menuData");
+
+    if (getData) {
+      setCart(JSON.parse(getData));
+    }
+  }, []);
+
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
       <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
@@ -32,7 +61,10 @@ function Card({ menuData }: { menuData: IMenuItem }) {
       <div className=" mt-4 w-full px-2">
         <Sheet>
           <SheetTrigger className="w-full" asChild>
-            <Button className="w-full bg-primary text-white">
+            <Button
+              className="w-full bg-primary text-white"
+              onClick={handleClick}
+            >
               Add To cart
             </Button>
           </SheetTrigger>

@@ -36,16 +36,6 @@ export const navLinks: NavLinkProps[] = [
     label: "Orders", // Label for the order link
     icon: NotepadText, // Order icon component
   },
-  {
-    href: "/history", // History page URL
-    label: "History", // Label for the history link
-    icon: Clock8, // History icon component
-  },
-  {
-    href: "/cart", // Bills page URL
-    label: "Cart", // Label for the bills link
-    icon: ShoppingBasket, // Bills icon component
-  },
 ];
 
 export const sideBarLinks: SideBarLinksProp[] = [

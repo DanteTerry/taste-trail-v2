@@ -6,17 +6,21 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/constants/constant";
+import { ShoppingBasket } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Cart from "./Cart";
+import { Button } from "./ui/button";
 
 function NavLinks() {
   const pathname = usePathname();
   return (
-    <nav className="hidden md:flex gap-5 text-neutral-400 font-semibold">
+    <nav className="hidden items-center gap-5 font-semibold text-neutral-400 md:flex">
       {navLinks.map((link) => (
         <li className="list-none" key={link.href}>
           <Link
             className={cn(
-              "flex gap-2 hover:text-neutral-600 transition-all duration-300",
-              pathname === link.href && "text-primary hover:text-primary"
+              "flex gap-2 transition-all duration-300 hover:text-neutral-600",
+              pathname === link.href && "text-primary hover:text-primary",
             )}
             href={link.href}
           >
@@ -24,6 +28,17 @@ function NavLinks() {
           </Link>
         </li>
       ))}
+
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button className="w-max bg-white font-semibold  text-neutral-400 transition-all duration-300 hover:bg-white hover:text-neutral-600">
+            <ShoppingBasket /> Cart
+          </Button>
+        </SheetTrigger>
+        <SheetContent>
+          <Cart />
+        </SheetContent>
+      </Sheet>
     </nav>
   );
 }
