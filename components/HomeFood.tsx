@@ -8,7 +8,7 @@ import { IMenuItem } from "@/types/types";
 async function HomeFood() {
   const menuData = await getMenu();
 
-  const homeMenu = menuData.sort(() => Math.random() - 0.5).slice(0, 4);
+  const homeMenu = menuData?.sort(() => Math.random() - 0.5).slice(0, 4);
 
   return (
     <div className=" bg-neutral-100 p-4 py-10 md:px-16">
@@ -17,7 +17,7 @@ async function HomeFood() {
       </h2>
 
       <div className="mt-5 grid  w-full grid-cols-2 gap-x-5 gap-y-5 md:mt-10  md:grid-cols-4">
-        {cuisineImg.map((cuisine, index) => (
+        {cuisineImg?.map((cuisine, index) => (
           <div key={index} className="relative flex justify-between">
             <Image
               key={index}
