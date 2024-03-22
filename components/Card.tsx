@@ -31,6 +31,7 @@ function Card({ menuData }: CardProps) {
         }
       });
     } else {
+      setIsInCart(true);
       cartData.push({ ...menuData, isInCart: true });
     }
 
@@ -39,15 +40,12 @@ function Card({ menuData }: CardProps) {
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-
     const isItemInCart = cartData.some(
       (item: IMenuItem) => item._id === menuData._id,
     );
 
     if (isItemInCart) {
       setIsInCart(true);
-    } else {
-      setIsInCart(false);
     }
   }, [menuData._id]);
 
