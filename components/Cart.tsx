@@ -9,12 +9,28 @@ import { Button } from "./ui/button";
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
 
+  const handleQuantityChange = (itemId: string, newQuantity: number) => {
+    setCart((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item._id === itemId ? { ...item, quantity: newQuantity } : item,
+      ),
+    );
+  };
+
   useEffect(() => {
     const cartData = localStorage.getItem("cart");
     if (cartData) {
       setCart(JSON.parse(cartData));
     }
   }, []);
+
+  // calculate the total price of the cart
+
+  const subtotal = cart.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+
+  const tax = subtotal * 0.1;
 
   return (
     <div className="h-full py-4 md:p-4">
@@ -34,24 +50,30 @@ function Cart() {
               Cart is empty
             </h3>
           ) : (
-            cart.map((item, index) => <CartItem key={index} item={item} />)
+            cart.map((item, index) => (
+              <CartItem
+                handleQuantityChange={handleQuantityChange}
+                key={index}
+                item={item}
+              />
+            ))
           )}
         </div>
         <div className="mb-5 w-full p-4  md:mt-5 ">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between text-lg">
               <h3 className="text-lg font-semibold text-black">Sub Total</h3>
-              <p className="font-semibold text-primary ">₹ {200}</p>
+              <p className="font-semibold text-primary ">₹ {subtotal}</p>
             </div>
 
             <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
               <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
-              <p className="font-semibold text-primary "> ₹ {21}</p>
+              <p className="font-semibold text-primary "> ₹ {tax}</p>
             </div>
 
             <div className="flex justify-between text-lg md:mt-3">
               <h3 className="text-lg font-semibold text-black">Total</h3>
-              <p className="font-semibold text-primary "> ₹ {100}</p>
+              <p className="font-semibold text-primary "> ₹ {subtotal + tax}</p>
             </div>
           </div>
 

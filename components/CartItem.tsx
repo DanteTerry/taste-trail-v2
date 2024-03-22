@@ -3,19 +3,26 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { ICartItem, IMenuItem } from "@/types/types";
 
-function CartItem({ item }: { item: IMenuItem }) {
-  const { name, price, image, cuisine } = item;
-  const [quantity, setQuantity] = useState(1);
+function CartItem({
+  item,
+  handleQuantityChange,
+}: {
+  item: IMenuItem;
+  handleQuantityChange: (itemId: string, newQuantity: number) => void;
+}) {
+  const { _id, name, price, image, cuisine, quantity } = item;
 
-  function handleIncrement() {
-    setQuantity(quantity + 1);
-  }
+  if (!_id) return null;
 
-  function handleDecrement() {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  const handleIncrement = () => {
+    if (item.quantity < 4) handleQuantityChange(_id, quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (item.quantity > 1) {
+      handleQuantityChange(_id, quantity - 1);
     }
-  }
+  };
 
   return (
     <div className="flex items-center justify-between">

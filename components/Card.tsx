@@ -6,7 +6,6 @@ import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
-import { set } from "mongoose";
 
 interface CardProps {
   menuData: IMenuItem;
@@ -14,6 +13,8 @@ interface CardProps {
 
 function Card({ menuData }: CardProps) {
   const { name, image, price, description } = menuData;
+
+  menuData.quantity = 1;
 
   const [isInCart, setIsInCart] = useState(false);
 

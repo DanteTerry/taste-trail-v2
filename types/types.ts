@@ -6,6 +6,7 @@ export interface IMenuItem {
   price: number;
   description: string;
   isInCart: boolean;
+  quantity: number;
 }
 
 export interface ICartItem {
