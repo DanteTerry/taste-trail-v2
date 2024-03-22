@@ -16,6 +16,7 @@ function Cart() {
   };
 
   const cartData = JSON.stringify(cart);
+
   useEffect(() => {
     const cartData = localStorage.getItem("cart");
     if (cartData) {

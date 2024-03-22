@@ -5,18 +5,18 @@ import { Button } from "./ui/button";
 import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 interface CardProps {
   menuData: IMenuItem;
 }
 
 function Card({ menuData }: CardProps) {
+  const [isInCart, setIsInCart] = useState(false);
+
   const { name, image, price, description } = menuData;
 
   menuData.quantity = 1;
-
-  const [isInCart, setIsInCart] = useState(false);
 
   function handleAddToCart() {
     const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -49,8 +49,12 @@ function Card({ menuData }: CardProps) {
 
     if (isItemInCart) {
       setIsInCart(true);
+    } else {
+      setIsInCart(false);
     }
   }, [menuData._id]);
+
+  // get data from local storage and check if the item is in the cart or not if it is in the cart then set the isInCart to true else set it to false
 
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">

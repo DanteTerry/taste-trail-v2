@@ -14,13 +14,16 @@ const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
   if (!_id) throw new Error("Item id is required");
 
   const handleIncrement = () => {
-    handleQuantityChange(_id, quantity + 1);
-
-    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-    const updatedCart = cartData.map((cartItem: IMenuItem) =>
-      cartItem._id === _id ? { ...cartItem, quantity: quantity + 1 } : cartItem,
-    );
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    if (quantity < 5) {
+      handleQuantityChange(_id, quantity + 1);
+      const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+      const updatedCart = cartData.map((cartItem: IMenuItem) =>
+        cartItem._id === _id
+          ? { ...cartItem, quantity: quantity + 1 }
+          : cartItem,
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
   };
 
   const handleDecrement = () => {
@@ -59,7 +62,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
 
           <h4 className="w-max text-lg font-semibold">Price</h4>
           <p className="w-max rounded-full bg-green-500 px-3 text-sm text-white">
-            $ {price}
+            ₹ {price}
           </p>
         </div>
       </div>
