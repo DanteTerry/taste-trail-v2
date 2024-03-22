@@ -2,51 +2,69 @@
 
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
+import { set } from "mongoose";
 
 interface CardProps {
   menuData: IMenuItem;
 }
 
 function Card({ menuData }: CardProps) {
-  const [cart, setCart] = useState<IMenuItem[]>([]); // Corrected type for cart state
-
   const { name, image, price, description } = menuData;
 
-  function handleClick() {
-    const cartData = JSON.parse(localStorage.getItem("menuData") || "[]");
+  const [isInCart, setIsInCart] = useState(false);
 
-    if (!cartData.find((item: IMenuItem) => item._id === menuData._id)) {
-      cartData.push(menuData);
-      localStorage.setItem("menuData", JSON.stringify(cartData));
+  function handleAddToCart() {
+    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+    const isItemInCart = cartData.some(
+      (item: IMenuItem) => item._id === menuData._id,
+    );
+
+    if (isItemInCart) {
+      setIsInCart(true);
+      cartData.forEach((item: IMenuItem) => {
+        if (item._id === menuData._id) {
+          item.isInCart = true;
+        }
+      });
     } else {
-      console.log("Item already in cart");
+      cartData.push({ ...menuData, isInCart: true });
     }
+
+    localStorage.setItem("cart", JSON.stringify(cartData));
   }
 
   useEffect(() => {
-    const getData = localStorage.getItem("menuData");
+    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    if (getData) {
-      setCart(JSON.parse(getData));
+    const isItemInCart = cartData.some(
+      (item: IMenuItem) => item._id === menuData._id,
+    );
+
+    if (isItemInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
     }
-  }, []);
+  }, [menuData._id]);
 
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
       <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
-        <Image
-          src={image}
-          alt="food"
-          width={0}
-          sizes="100%"
-          height={0}
-          className=" h-full w-full object-cover"
-          priority={true}
-        />
+        <div className="h-[200px] w-[268px] overflow-hidden">
+          <Image
+            src={image}
+            alt="food"
+            width={0}
+            height={0}
+            sizes="100%"
+            className=" h-full w-full overflow-hidden object-cover"
+            priority={true}
+          />
+        </div>
       </div>
 
       <div className="flex justify-between  gap-4 p-2">
@@ -56,16 +74,17 @@ function Card({ menuData }: CardProps) {
         </p>
       </div>
 
-      <p className="px-2 text-justify">{description}</p>
+      <p className="px-2 text-justify tracking-tighter">{description}</p>
 
       <div className=" mt-4 w-full px-2">
         <Sheet>
           <SheetTrigger className="w-full" asChild>
             <Button
               className="w-full bg-primary text-white"
-              onClick={handleClick}
+              onClick={handleAddToCart}
+              disabled={isInCart}
             >
-              Add To cart
+              {isInCart ? "Added" : "Add to Cart"}
             </Button>
           </SheetTrigger>
           <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px] ">

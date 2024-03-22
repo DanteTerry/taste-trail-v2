@@ -3,13 +3,12 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/constants/constant";
-import { ShoppingBasket } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Cart from "./Cart";
 import { Button } from "./ui/button";
+import Cart from "./Cart";
 
 function NavLinks() {
   const pathname = usePathname();
@@ -31,11 +30,9 @@ function NavLinks() {
 
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="w-max bg-white font-semibold  text-neutral-400 transition-all duration-300 hover:bg-white hover:text-neutral-600">
-            <ShoppingBasket /> Cart
-          </Button>
+          <Button>Open</Button>
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px] ">
           <Cart />
         </SheetContent>
       </Sheet>

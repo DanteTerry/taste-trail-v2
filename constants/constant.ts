@@ -36,6 +36,12 @@ export const navLinks: NavLinkProps[] = [
     label: "Orders", // Label for the order link
     icon: NotepadText, // Order icon component
   },
+
+  {
+    href: "/cart",
+    label: "Cart",
+    icon: ShoppingBasket,
+  },
 ];
 
 export const sideBarLinks: SideBarLinksProp[] = [

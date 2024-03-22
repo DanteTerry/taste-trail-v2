@@ -1,26 +1,22 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { IMenuItem } from "@/types/types";
+import { ICartItem, IMenuItem } from "@/types/types";
 
-function CartItem({
-  item,
-  setQuantity,
-  quantity,
-}: {
-  item: IMenuItem;
-  setQuantity: React.Dispatch<React.SetStateAction<number>>;
-  quantity: number;
-}) {
-  const { name, cuisine, price, image } = item;
+function CartItem({ item }: { item: IMenuItem }) {
+  const { name, price, image, cuisine } = item;
+  const [quantity, setQuantity] = useState(1);
 
-  const handleIncrement = () => {
-    setQuantity((prev) => prev + 1);
-  };
+  function handleIncrement() {
+    setQuantity(quantity + 1);
+  }
 
-  const handleDecrement = () => {
-    setQuantity((prev) => (prev === 1 ? prev : prev - 1));
-  };
+  function handleDecrement() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3 ">

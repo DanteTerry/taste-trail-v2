@@ -40,6 +40,7 @@ function Hero() {
           height={0}
           width={0}
           sizes="100%"
+          priority={true}
           className="w-2/3 rotate-90 md:rotate-0"
         />
       </div>
