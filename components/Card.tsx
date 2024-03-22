@@ -29,6 +29,8 @@ function Card({ menuData }: CardProps) {
       cartData.forEach((item: IMenuItem) => {
         if (item._id === menuData._id) {
           item.isInCart = true;
+        } else {
+          item.isInCart = false;
         }
       });
     } else {

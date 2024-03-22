@@ -1,37 +1,43 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
-import { ICartItem, IMenuItem } from "@/types/types";
+import { IMenuItem } from "@/types/types";
 
-function CartItem({
-  item,
-  handleQuantityChange,
-}: {
+interface CartItemProps {
   item: IMenuItem;
   handleQuantityChange: (itemId: string, newQuantity: number) => void;
-}) {
+}
+
+const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
   const { _id, name, price, image, cuisine, quantity } = item;
 
-  if (!_id) return null;
+  if (!_id) throw new Error("Item id is required");
 
   const handleIncrement = () => {
-    if (item.quantity < 4) handleQuantityChange(_id, quantity + 1);
+    handleQuantityChange(_id, quantity + 1);
+
+    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+    const updatedCart = cartData.map((cartItem: IMenuItem) =>
+      cartItem._id === _id ? { ...cartItem, quantity: quantity + 1 } : cartItem,
+    );
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const handleDecrement = () => {
-    if (item.quantity > 1) {
+    if (quantity > 0) {
       handleQuantityChange(_id, quantity - 1);
-    }
 
-    // if quantity is 1, remove the item from the cart from local storage
+      //update the cart to the recent quantity if quantity === 0  Delete the item from the cart if the quantity becomes 0
 
-    if (item.quantity === 1) {
       const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
 
-      const updatedCart = cartData.filter(
-        (cartItem: IMenuItem) => cartItem._id !== item._id,
-      );
-
+      const updatedCart = cartData
+        .map((cartItem: IMenuItem) =>
+          cartItem._id === _id
+            ? { ...cartItem, quantity: quantity - 1 }
+            : cartItem,
+        )
+        .filter((cartItem: IMenuItem) => cartItem.quantity > 0);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
@@ -44,7 +50,7 @@ function CartItem({
           alt="Food"
           width={100}
           height={100}
-          className=" rounded-lg "
+          className="rounded-lg"
         />
 
         <div className="w-max">
@@ -52,23 +58,23 @@ function CartItem({
           <p className="text-sm text-gray-500">{cuisine}</p>
 
           <h4 className="w-max text-lg font-semibold">Price</h4>
-          <p className="w-max rounded-full  bg-green-500 px-3 text-sm   text-white">
+          <p className="w-max rounded-full bg-green-500 px-3 text-sm text-white">
             $ {price}
           </p>
         </div>
       </div>
 
       <div className="flex w-[110px] items-center justify-between self-end">
-        <Button size={"sm"} className=" text-2xl" onClick={handleDecrement}>
+        <Button size="sm" className="text-2xl" onClick={handleDecrement}>
           -
         </Button>
         <span className="text-xl font-semibold">{quantity}</span>
-        <Button size={"sm"} onClick={handleIncrement} className=" text-2xl">
+        <Button size="sm" onClick={handleIncrement} className="text-2xl">
           +
         </Button>
       </div>
     </div>
   );
-}
+};
 
 export default CartItem;

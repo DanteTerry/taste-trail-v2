@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import { cn } from "@/lib/utils";
 import { IMenuItem } from "@/types/types";
@@ -17,14 +15,13 @@ function Cart() {
     );
   };
 
+  const cartData = JSON.stringify(cart);
   useEffect(() => {
     const cartData = localStorage.getItem("cart");
     if (cartData) {
       setCart(JSON.parse(cartData));
     }
-  }, [cart]);
-
-  // calculate the total price of the cart
+  }, [cartData]);
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
@@ -73,7 +70,7 @@ function Cart() {
 
             <div className="flex justify-between text-lg md:mt-3">
               <h3 className="text-lg font-semibold text-black">Total</h3>
-              <p className="font-semibold text-primary "> ₹ {subtotal + tax}</p>
+              <p className="font-semibold text-primary ">₹ {subtotal + tax}</p>
             </div>
           </div>
 
