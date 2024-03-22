@@ -22,6 +22,18 @@ function CartItem({
     if (item.quantity > 1) {
       handleQuantityChange(_id, quantity - 1);
     }
+
+    // if quantity is 1, remove the item from the cart from local storage
+
+    if (item.quantity === 1) {
+      const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      const updatedCart = cartData.filter(
+        (cartItem: IMenuItem) => cartItem._id !== item._id,
+      );
+
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
   };
 
   return (

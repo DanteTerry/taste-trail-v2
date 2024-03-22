@@ -22,7 +22,7 @@ function Cart() {
     if (cartData) {
       setCart(JSON.parse(cartData));
     }
-  }, []);
+  }, [cart]);
 
   // calculate the total price of the cart
 
