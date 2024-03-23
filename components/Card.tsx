@@ -2,10 +2,17 @@
 
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { use, useEffect, useState } from "react";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface CardProps {
   menuData: IMenuItem;
@@ -54,8 +61,6 @@ function Card({ menuData }: CardProps) {
     }
   }, [menuData._id]);
 
-  // get data from local storage and check if the item is in the cart or not if it is in the cart then set the isInCart to true else set it to false
-
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
       <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
@@ -92,7 +97,7 @@ function Card({ menuData }: CardProps) {
               {isInCart ? "Added" : "Add to Cart"}
             </Button>
           </SheetTrigger>
-          <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px] ">
+          <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px]">
             <Cart />
           </SheetContent>
         </Sheet>

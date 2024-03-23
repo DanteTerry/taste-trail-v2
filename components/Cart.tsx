@@ -3,9 +3,13 @@ import CartItem from "./CartItem";
 import { cn } from "@/lib/utils";
 import { IMenuItem } from "@/types/types";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+
+import { SheetClose } from "@/components/ui/sheet";
 
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
+  const router = useRouter();
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     setCart((prevCartItems) =>
@@ -13,6 +17,10 @@ function Cart() {
         item._id === itemId ? { ...item, quantity: newQuantity } : item,
       ),
     );
+  };
+
+  const handleCheckOut = () => {
+    router.push("/cart");
   };
 
   const cartData = JSON.stringify(cart);
@@ -75,9 +83,14 @@ function Cart() {
             </div>
           </div>
 
-          <Button className=" mt-3 w-full rounded-lg bg-primary p-3 text-white md:mt-5">
-            Checkout
-          </Button>
+          <SheetClose className="w-full" asChild>
+            <Button
+              className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
+              onClick={handleCheckOut}
+            >
+              Add to Cart
+            </Button>
+          </SheetClose>
         </div>
       </div>
     </div>

@@ -8,13 +8,3 @@ export interface IMenuItem {
   isInCart: boolean;
   quantity: number;
 }
-
-export interface ICartItem {
-  name: string;
-  image: string;
-  price: number;
-  description: string;
-  isInCart: boolean;
-  quantity: number;
-  cuisine: string;
-}

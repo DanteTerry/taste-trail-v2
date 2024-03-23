@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import { IMenuItem } from "@/types/types";
+import { Trash2 } from "lucide-react";
 
 interface CartItemProps {
   item: IMenuItem;
@@ -24,6 +25,17 @@ const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
       );
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
+  };
+
+  const handleDelete = () => {
+    handleQuantityChange(_id, 0);
+
+    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const updatedCart = cartData.filter(
+      (cartItem: IMenuItem) => cartItem._id !== _id,
+    );
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const handleDecrement = () => {
@@ -67,14 +79,24 @@ const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
         </div>
       </div>
 
-      <div className="flex w-[110px] items-center justify-between self-end">
-        <Button size="sm" className="text-2xl" onClick={handleDecrement}>
-          -
+      <div className="flex  h-full flex-col justify-between">
+        <Button
+          className="w-max self-end"
+          variant={"ghost"}
+          size={"sm"}
+          onClick={handleDelete}
+        >
+          <Trash2 size={"20px"} />
         </Button>
-        <span className="text-xl font-semibold">{quantity}</span>
-        <Button size="sm" onClick={handleIncrement} className="text-2xl">
-          +
-        </Button>
+        <div className="flex  w-[110px] items-center  justify-between">
+          <Button size="sm" className="text-2xl" onClick={handleDecrement}>
+            -
+          </Button>
+          <span className="text-xl font-semibold">{quantity}</span>
+          <Button size="sm" onClick={handleIncrement} className="text-2xl">
+            +
+          </Button>
+        </div>
       </div>
     </div>
   );

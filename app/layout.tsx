@@ -32,8 +32,8 @@ export default function RootLayout({
         <Header />
         <MobileNav />
         <main>
-          <Sidebar className="hidden  h-full bg-white lg:fixed lg:pt-20" />
-          <section className={cn("pt-[65px] lg:pl-[128px]")}>
+          <Sidebar className="hidden h-full bg-white lg:fixed lg:pt-20" />
+          <section className={cn("h-full pt-[65px] lg:pl-[128px]")}>
             {children}
           </section>
         </main>

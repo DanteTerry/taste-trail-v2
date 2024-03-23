@@ -7,7 +7,10 @@ function Hero() {
     <section className="flex h-screen  w-full flex-col  p-4 md:px-16 lg:h-[100vh] lg:flex-row  lg:justify-center">
       <div className=" flex flex-col justify-center gap-3 text-justify md:gap-5 lg:w-1/2">
         <h1 className="text-3xl md:text-4xl">
-          Welcome to <span className="text-primary">TasteTrail</span>
+          Welcome to{" "}
+          <span className="text-4xl font-semibold text-primary">
+            TasteTrail
+          </span>
         </h1>
         <p className=" md:-widest text-xl md:text-xl lg:pr-5">
           Your one-stop culinary destination, where you can delight in an
@@ -49,33 +52,3 @@ function Hero() {
 }
 
 export default Hero;
-
-{
-  /* <div className="flex flex-col md:flex-row  gap-5 items-center">
-  <div className="flex">
-    {customerImg.map((customer: string) => (
-      <Image
-        src={`/customers/${customer}`}
-        alt={customer}
-        width={50}
-        height={50}
-        sizes="100%"
-        className="rounded-full -ml-3 border-white border-2"
-        key={customer}
-      />
-    ))}
-  </div>
-
-  <div className="flex flex-col">
-    <p className="">
-      {" "}
-      <span className="text-primary text-lg font-semibold">3,000+ </span> meals
-      delivered this year!
-    </p>
-
-    <p className="flex items-center  gap-3">
-      <FaHeart className="text-red-500" /> 4.6 (10.9K Reviews)
-    </p>
-  </div>
-</div>; */
-}
