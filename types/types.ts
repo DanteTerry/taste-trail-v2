@@ -1,3 +1,6 @@
+import { CheckoutSchema } from "@/lib/validation";
+import { z } from "zod";
+
 export interface IMenuItem {
   _id?: string;
   name: string;
@@ -8,3 +11,5 @@ export interface IMenuItem {
   isInCart: boolean;
   quantity: number;
 }
+
+export type Checkout = z.infer<typeof CheckoutSchema>;

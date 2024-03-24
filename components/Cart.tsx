@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 
 import { SheetClose } from "@/components/ui/sheet";
+import { Check } from "lucide-react";
 
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);

@@ -6,10 +6,9 @@ import { getMenu } from "@/utils/menuRequestHandler";
 import { IMenuItem } from "@/types/types";
 
 async function HomeFood() {
-  const menuData = await getMenu();
+  const menuData: IMenuItem[] = await getMenu();
 
   const homeMenu = menuData?.sort(() => Math.random() - 0.5).slice(0, 4);
-
   return (
     <div className=" bg-neutral-100 p-4 py-10 md:px-16">
       <h2 className="mt-5 text-center text-[5vw] font-semibold leading-8 text-primary md:mt-10 md:text-[2.4vw]">

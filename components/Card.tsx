@@ -5,14 +5,7 @@ import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 interface CardProps {
   menuData: IMenuItem;

@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
 import { Toaster } from "@/components/ui/sonner";
-
 import "./globals.css";
 
 const spaceSpace_Grotesk = Space_Grotesk({
