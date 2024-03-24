@@ -16,6 +16,8 @@ function CartPage() {
     const cartData = localStorage.getItem("cart");
     if (cartData) {
       setCart(JSON.parse(cartData));
+    } else {
+      setCart([]);
     }
   }, []);
 
@@ -40,7 +42,7 @@ function CartPage() {
       ...data,
       cart,
     };
-    // Handle submitting order data, e.g., sending it to a server
+  
   };
 
   const renderCartItems = () => {
