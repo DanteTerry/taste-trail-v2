@@ -1,6 +1,6 @@
-import { ICartItem } from "@/types/types";
+import { IMenuItem } from "@/types/types";
 
-export const getCartItems = async (): Promise<ICartItem[]> => {
+export const getCartItems = async (): Promise<IMenuItem[]> => {
   try {
     const res = await fetch(
       `${process.env.LOCALHOST || "http://localhost:3000/"}/api/cart`,
@@ -16,7 +16,7 @@ export const getCartItems = async (): Promise<ICartItem[]> => {
   }
 };
 
-export const createCartItems = async (data: ICartItem) => {
+export const createCartItems = async (data: IMenuItem) => {
   try {
     const res = await fetch(
       `${process.env.LOCALHOST || "http://localhost:3000/"}/api/cart`,
