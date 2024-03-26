@@ -1,4 +1,4 @@
-import mongoose, { Error, MongooseError } from "mongoose";
+import mongoose, { Error } from "mongoose";
 import { toast } from "sonner";
 
 export const connectDB = async () => {

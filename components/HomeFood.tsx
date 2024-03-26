@@ -1,16 +1,32 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import Image from "next/image";
 import { cuisineImg } from "@/constants/constant";
 import { getMenu } from "@/utils/menuRequestHandler";
 import { IMenuItem } from "@/types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { setMenu } from "@/utils/redux/slices/menuSlice";
 
-async function HomeFood() {
-  const menuData: IMenuItem[] = await getMenu();
+function HomeFood() {
+  const dispatch = useDispatch();
 
-  const homeMenu = menuData?.sort(() => Math.random() - 0.5).slice(0, 4);
+  function fetchData() {
+    getMenu().then((data) => {
+      dispatch(setMenu(data));
+    });
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const homeMenu: IMenuItem[] = useSelector((state: any) => state.menu);
+
+  const homeMenuData = [...homeMenu].slice(0, 4);
+
   return (
-    <div className=" bg-neutral-100 p-4 py-5 md:px-16">
+    <div className=" bg-neutral-100 p-4 py-10 md:px-16">
       <h2 className="mt-5 text-center text-[5vw] font-semibold leading-8 text-primary md:mt-10 md:text-[2.4vw]">
         We offer a wide range of cuisines
       </h2>
@@ -40,7 +56,7 @@ async function HomeFood() {
       </h2>
 
       <div className="mt-5  flex flex-wrap items-center justify-center gap-4 md:mt-8">
-        {homeMenu.map((menu: IMenuItem) => (
+        {homeMenuData.map((menu: IMenuItem) => (
           <Card key={menu._id} menuData={menu} />
         ))}
       </div>

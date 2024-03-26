@@ -9,7 +9,18 @@ const MenuSchema = new Schema<IMenuItem>({
   cuisine: { type: String, required: true },
   image: { type: String, required: true },
   price: { type: Number, required: true },
-  description: { type: String, required: true, maxlength: 20 },
+  description: { type: String, required: true, maxlength: 50 },
+  category: { type: String, required: true },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  isInCart: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 // Create and export the Mongoose model for the Menu item

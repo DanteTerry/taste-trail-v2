@@ -9,6 +9,7 @@ import { SheetClose } from "@/components/ui/sheet";
 
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
+
   const router = useRouter();
   const [step, setStep] = useState(1);
 

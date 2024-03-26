@@ -9,14 +9,16 @@ export const getCartItems = async (): Promise<IMenuItem[]> => {
       },
     );
 
-    return res.json();
+    const data = await res.json();
+
+    return data;
   } catch (error: any) {
     console.log(error.message);
     throw error;
   }
 };
 
-export const createCartItems = async (data: IMenuItem) => {
+export const createCartItems = async (item: IMenuItem) => {
   try {
     const res = await fetch(
       `${process.env.LOCALHOST || "http://localhost:3000/"}/api/cart`,
@@ -25,10 +27,13 @@ export const createCartItems = async (data: IMenuItem) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(item),
       },
     );
-    return res;
+
+    const data = await res.json();
+
+    return data;
   } catch (error: any) {
     console.log(error.message);
   }

@@ -1,22 +1,20 @@
 "use client";
-
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
-import Cart from "./Cart";
 import { IMenuItem } from "@/types/types";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/utils/redux/store/store";
+import { setMenu } from "@/utils/redux/slices/menuSlice";
 
 interface CardProps {
   menuData: IMenuItem;
 }
 
 function Card({ menuData }: CardProps) {
-  const [isInCart, setIsInCart] = useState(false);
-
-  const { name, image, price, description } = menuData;
-
-  menuData.quantity = 1;
+  const { name, image, price, description, isInCart } = menuData;
+  const menu = useSelector((state: RootState) => state.menu);
+  const dispatch = useDispatch();
 
   function handleAddToCart() {
     const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -24,21 +22,17 @@ function Card({ menuData }: CardProps) {
       (item: IMenuItem) => item._id === menuData._id,
     );
 
-    if (isItemInCart) {
-      setIsInCart(true);
-      cartData.forEach((item: IMenuItem) => {
-        if (item._id === menuData._id) {
-          item.isInCart = true;
-        } else {
-          item.isInCart = false;
-        }
-      });
-    } else {
-      setIsInCart(true);
+    if (!isItemInCart) {
       cartData.push({ ...menuData, isInCart: true });
+      localStorage.setItem("cart", JSON.stringify(cartData));
+      // find the current item in menu and set isInCart to true
+      const updatedMenu = menu.map((item: IMenuItem) =>
+        item._id === menuData._id ? { ...item, isInCart: true } : item,
+      );
+      dispatch(setMenu(updatedMenu));
+    } else {
+      // Item already exists in cart, do nothing
     }
-
-    localStorage.setItem("cart", JSON.stringify(cartData));
   }
 
   useEffect(() => {
@@ -46,25 +40,31 @@ function Card({ menuData }: CardProps) {
     const isItemInCart = cartData.some(
       (item: IMenuItem) => item._id === menuData._id,
     );
-
     if (isItemInCart) {
-      setIsInCart(true);
-    } else {
-      setIsInCart(false);
+      // Item is already in cart, set isInCart to true
+      cartData.forEach((item: IMenuItem) => {
+        if (item._id === menuData._id) {
+          item.isInCart = true;
+        } else {
+          item.isInCart = false;
+        }
+      });
     }
   }, [menuData._id]);
+
+  console.log(menu);
 
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
       <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
         <div className="h-[200px] w-[268px] overflow-hidden">
           <Image
-            src={image}
+            src={image || "/icons/food.jpg"}
             alt="food"
             width={0}
             height={0}
             sizes="100%"
-            className=" h-full w-full overflow-hidden object-cover"
+            className="h-full w-full overflow-hidden object-cover"
             priority={true}
           />
         </div>
@@ -82,8 +82,8 @@ function Card({ menuData }: CardProps) {
       <div className=" mt-4 w-full px-2">
         <Button
           className="w-full bg-primary text-white"
-          onClick={handleAddToCart}
           disabled={isInCart}
+          onClick={handleAddToCart}
         >
           {isInCart ? "Added" : "Add to Cart"}
         </Button>

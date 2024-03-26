@@ -10,6 +10,7 @@ export interface IMenuItem {
   description: string;
   isInCart: boolean;
   quantity: number;
+  category: string;
 }
 
 export type Checkout = z.infer<typeof CheckoutSchema>;
