@@ -7,10 +7,12 @@ import { Menu } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "./Sidebar";
+import { Button } from "./ui/button";
+import Cart from "./Cart";
 
 function Header() {
   return (
-    <header className="fixed top-0 z-50 flex w-screen items-center justify-between border-b-2 bg-white p-4 ">
+    <header className="fixed top-0 z-50 flex w-screen items-center justify-between border-b-2 bg-white p-4 px-6 ">
       <div className="flex items-center md:hidden ">
         <Sheet>
           <SheetTrigger>
@@ -29,9 +31,17 @@ function Header() {
         </Link>
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3">
         <NavLinks />
         <DiningDropDown />
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button>Cart</Button>
+          </SheetTrigger>
+          <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px] ">
+            <Cart />
+          </SheetContent>
+        </Sheet>
         {/* <HeaderTime /> */}
         <UserProfile />
       </div>

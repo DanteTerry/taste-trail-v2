@@ -10,7 +10,7 @@ async function HomeFood() {
 
   const homeMenu = menuData?.sort(() => Math.random() - 0.5).slice(0, 4);
   return (
-    <div className=" bg-neutral-100 p-4 py-10 md:px-16">
+    <div className=" bg-neutral-100 p-4 py-5 md:px-16">
       <h2 className="mt-5 text-center text-[5vw] font-semibold leading-8 text-primary md:mt-10 md:text-[2.4vw]">
         We offer a wide range of cuisines
       </h2>

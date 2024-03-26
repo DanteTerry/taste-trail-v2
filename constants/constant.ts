@@ -1,12 +1,4 @@
-import {
-  Home,
-  NotepadText,
-  Clock8,
-  ShoppingBasket,
-  Sandwich,
-  Pizza,
-  Soup,
-} from "lucide-react";
+import { Home, NotepadText, Sandwich, Pizza, Soup } from "lucide-react";
 
 import { SiBuymeacoffee } from "react-icons/si";
 import { GiSlicedBread } from "react-icons/gi";
@@ -35,12 +27,6 @@ export const navLinks: NavLinkProps[] = [
     href: "/orders", // Order page URL
     label: "Orders", // Label for the order link
     icon: NotepadText, // Order icon component
-  },
-
-  {
-    href: "/cart",
-    label: "Cart",
-    icon: ShoppingBasket,
   },
 ];
 

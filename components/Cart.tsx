@@ -1,16 +1,16 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import { cn } from "@/lib/utils";
 import { IMenuItem } from "@/types/types";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-
 import { SheetClose } from "@/components/ui/sheet";
-import { Check } from "lucide-react";
 
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
   const router = useRouter();
+  const [step, setStep] = useState(1);
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     setCart((prevCartItems) =>
@@ -18,10 +18,6 @@ function Cart() {
         item._id === itemId ? { ...item, quantity: newQuantity } : item,
       ),
     );
-  };
-
-  const handleCheckOut = () => {
-    router.push("/cart");
   };
 
   const cartData = JSON.stringify(cart);
@@ -46,52 +42,93 @@ function Cart() {
       </h3>
 
       <div className="flex h-full flex-col justify-between">
-        <div
-          className={cn(
-            "mt-5 flex flex-col gap-5 rounded-lg border-b-2 bg-neutral-100 px-2 py-4 md:px-4 ",
-            cart.length > 3 && "overflow-y-scroll",
-          )}
-        >
-          {cart.length === 0 ? (
-            <h3 className="text-center text-lg font-semibold text-black">
-              Cart is empty
-            </h3>
-          ) : (
-            cart.map((item, index) => (
-              <CartItem
-                handleQuantityChange={handleQuantityChange}
-                key={index}
-                item={item}
-              />
-            ))
-          )}
-        </div>
-        <div className="mb-5 w-full p-4  md:mt-5 ">
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-between text-lg">
-              <h3 className="text-lg font-semibold text-black">Sub Total</h3>
-              <p className="font-semibold text-primary ">₹ {subtotal}</p>
-            </div>
-
-            <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
-              <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
-              <p className="font-semibold text-primary "> ₹ {tax}</p>
-            </div>
-
-            <div className="flex justify-between text-lg md:mt-3">
-              <h3 className="text-lg font-semibold text-black">Total</h3>
-              <p className="font-semibold text-primary ">₹ {subtotal + tax}</p>
-            </div>
+        {step === 1 && (
+          <div
+            className={cn(
+              "mt-5 flex  flex-col gap-5 rounded-lg border-b-2 bg-neutral-100 px-2 py-4 md:px-4 ",
+              cart.length > 3 && "h-[370px] overflow-y-scroll",
+            )}
+          >
+            {cart.length === 0 ? (
+              <h3 className="text-center text-lg font-semibold text-black">
+                Cart is empty
+              </h3>
+            ) : (
+              cart.map((item, index) => (
+                <CartItem
+                  handleQuantityChange={handleQuantityChange}
+                  key={index}
+                  item={item}
+                />
+              ))
+            )}
           </div>
+        )}
+        <div
+          className={cn("mb-5  w-full p-4  md:mt-5 ", step === 2 && "h-full")}
+        >
+          {step === 1 ? (
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between text-lg">
+                <h3 className="text-lg font-semibold text-black">Sub Total</h3>
+                <p className="font-semibold text-primary ">₹ {subtotal}</p>
+              </div>
 
-          <SheetClose className="w-full" asChild>
+              <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
+                <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
+                <p className="font-semibold text-primary "> ₹ {tax}</p>
+              </div>
+
+              <div className="flex justify-between text-lg md:mt-3">
+                <h3 className="text-lg font-semibold text-black">Total</h3>
+                <p className="font-semibold text-primary ">
+                  ₹ {subtotal + tax}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <form className="flex h-full flex-col justify-between">
+              <div className="flex h-full flex-col  gap-2">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="rounded-lg border-2 border-neutral-200 p-3"
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className="rounded-lg border-2 border-neutral-200 p-3"
+                />
+                <input
+                  type="text"
+                  placeholder="Phone"
+                  className="rounded-lg border-2 border-neutral-200 p-3"
+                />
+                <input
+                  type="text"
+                  placeholder="Address"
+                  className="rounded-lg border-2 border-neutral-200 p-3"
+                />
+              </div>
+              <SheetClose className="w-full" asChild>
+                <Button
+                  className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
+                  onClick={() => router.push("/orders")}
+                >
+                  Proceed to payment
+                </Button>
+              </SheetClose>
+            </form>
+          )}
+
+          {step === 1 && (
             <Button
               className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
-              onClick={handleCheckOut}
+              onClick={() => setStep(2)}
             >
-              Add to Cart
+              Add to cart
             </Button>
-          </SheetClose>
+          )}
         </div>
       </div>
     </div>

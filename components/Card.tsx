@@ -80,20 +80,13 @@ function Card({ menuData }: CardProps) {
       <p className="px-2 text-justify tracking-tighter">{description}</p>
 
       <div className=" mt-4 w-full px-2">
-        <Sheet>
-          <SheetTrigger className="w-full" asChild>
-            <Button
-              className="w-full bg-primary text-white"
-              onClick={handleAddToCart}
-              disabled={isInCart}
-            >
-              {isInCart ? "Added" : "Add to Cart"}
-            </Button>
-          </SheetTrigger>
-          <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px]">
-            <Cart />
-          </SheetContent>
-        </Sheet>
+        <Button
+          className="w-full bg-primary text-white"
+          onClick={handleAddToCart}
+          disabled={isInCart}
+        >
+          {isInCart ? "Added" : "Add to Cart"}
+        </Button>
       </div>
     </div>
   );
