@@ -13,7 +13,7 @@ function SignUpPage() {
           </p>
         </div>
 
-        <form action="" className="flex w-3/4 flex-col gap-4">
+        <form action="" className="flex w-full flex-col gap-4 md:w-3/4">
           <input
             type="text"
             placeholder="Name"

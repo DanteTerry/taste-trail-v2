@@ -4,7 +4,7 @@ import React from "react";
 
 function SignInPage() {
   return (
-    <div className="container w-full">
+    <div className=" container w-full">
       <div className="flex h-full w-full flex-col items-center justify-center gap-4">
         <div className="text-center">
           <h2 className="text-3xl font-semibold text-primary">Welcome</h2>
@@ -13,7 +13,7 @@ function SignInPage() {
           </p>
         </div>
 
-        <form action="" className="flex w-3/4 flex-col gap-4">
+        <form action="" className="flex w-full flex-col gap-4 md:w-3/4">
           <input
             type="email"
             placeholder="Email"
