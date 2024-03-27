@@ -1,27 +1,24 @@
 "use client";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { SignInSchema } from "@/lib/validation";
 import { TSignIn } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { AiFillGoogleCircle } from "react-icons/ai";
 
 function SignInPage() {
-  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
+    reset,
   } = useForm<TSignIn>({
     resolver: zodResolver(SignInSchema),
   });
-
-  const {data: session} = useSession();
-  console.log(session);
 
   const onsubmit = async (data: TSignIn) => {
     const user = {
@@ -39,7 +36,7 @@ function SignInPage() {
       toast(res.error);
     }
 
-    router.push("/cart");
+    reset();
   };
 
   return (
@@ -52,11 +49,24 @@ function SignInPage() {
           </p>
         </div>
 
+        <div className="w-full text-center md:w-3/4">
+          <Button
+            className="w-full rounded-md border-2 border-primary bg-white p-2 py-4 text-lg text-primary hover:bg-white"
+            onClick={() => signIn("google")}
+          >
+            Sign In with Google{" "}
+            <AiFillGoogleCircle className=" ml-2 text-2xl" />
+          </Button>
+        </div>
+
         <form
           className="flex w-full flex-col gap-4 md:w-3/4"
           onSubmit={handleSubmit(onsubmit)}
         >
           <div>
+            <p className="text-center text-2xl font-semibold text-gray-600">
+              or
+            </p>
             <label htmlFor="email" className="text-lg text-primary">
               Email
             </label>

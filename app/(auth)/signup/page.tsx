@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { SignUpSchema } from "@/lib/validation";
 import { TSignUp } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { AiFillGoogleCircle } from "react-icons/ai";
 import { toast } from "sonner";
 
 function SignUpPage() {
@@ -57,11 +59,21 @@ function SignUpPage() {
           </p>
         </div>
 
+        <div className="w-full text-center md:w-3/4">
+          <Button
+            className="w-full rounded-md border-2 border-primary bg-white p-2 py-4 text-lg text-primary hover:bg-white"
+            onClick={() => signIn("google")}
+          >
+            Sign Up with Google{" "}
+            <AiFillGoogleCircle className=" ml-2 text-2xl" />
+          </Button>
+        </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full flex-col gap-4 md:w-3/4"
         >
-         
+          <p className="text-center text-2xl font-semibold text-gray-600">or</p>
           <input
             type="text"
             placeholder="Name"

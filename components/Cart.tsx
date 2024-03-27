@@ -6,21 +6,15 @@ import { IMenuItem } from "@/types/types";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 function Cart() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
+  const { data: session } = useSession();
 
   const router = useRouter();
   const [step, setStep] = useState(1);
-
-  const handleQuantityChange = (itemId: string, newQuantity: number) => {
-    setCart((prevCartItems) =>
-      prevCartItems.map((item) =>
-        item._id === itemId ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
-  };
-
   const cartData = JSON.stringify(cart);
 
   useEffect(() => {
@@ -29,6 +23,14 @@ function Cart() {
       setCart(JSON.parse(cartData));
     }
   }, [cartData]);
+
+  const handleQuantityChange = (itemId: string, newQuantity: number) => {
+    setCart((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item._id === itemId ? { ...item, quantity: newQuantity } : item,
+      ),
+    );
+  };
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
@@ -125,7 +127,13 @@ function Cart() {
           {step === 1 && (
             <Button
               className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
-              onClick={() => setStep(2)}
+              onClick={() => {
+                if (!session) {
+                  toast("Please sign in to add items to cart");
+                  return;
+                }
+                setStep(2);
+              }}
             >
               Add to cart
             </Button>

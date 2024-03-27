@@ -1,13 +1,16 @@
 import { connectDB } from "@/database/db";
 import { UserModel } from "@/models/UserModel";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import bcryptjs from "bcryptjs";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {},
+
       async authorize(credentials) {
         const { email, password } = credentials as {
           email: string;
@@ -25,7 +28,7 @@ export const authOptions = {
           const passwordMatch = await bcryptjs.compare(password, user.password);
 
           if (!passwordMatch) {
-            return null;
+            throw new Error("Invalid email or password");
           }
 
           return user;
@@ -34,12 +37,59 @@ export const authOptions = {
         }
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
   },
 
-  callBacks: {
+  callbacks: {
+    async signIn({
+      user,
+      account,
+      profile,
+    }: {
+      user: any;
+      account: any;
+      profile: any;
+    }) {
+      if (account.provider === "google") {
+        try {
+          const { name, email } = user;
+          await connectDB();
+          const ifUserExist = await UserModel.findOne({ email });
+
+          if (ifUserExist) {
+            return user;
+          }
+
+          const newUser = {
+            name,
+            email,
+            image: profile?.image,
+          };
+
+          const userNew = await UserModel.create(newUser);
+          if (userNew) {
+            return user;
+          }
+        } catch (error: any) {
+          console.log(error.message);
+        }
+      }
+      return false;
+    },
+
     async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.email = user.email;
@@ -57,7 +107,7 @@ export const authOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET!,
+  secret: process.env.NEXTAUTH_SECRET || "your-secret",
   pages: {
     signIn: "/signin",
   },
