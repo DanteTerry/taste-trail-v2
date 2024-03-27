@@ -1,8 +1,47 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { SignInSchema } from "@/lib/validation";
+import { TSignIn } from "@/types/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { FormEvent } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 function SignInPage() {
+  const router = useRouter();
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm<TSignIn>({
+    resolver: zodResolver(SignInSchema),
+  });
+
+  const {data: session} = useSession();
+  console.log(session);
+
+  const onsubmit = async (data: TSignIn) => {
+    const user = {
+      email: data.email,
+      password: data.password,
+    };
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: user.email,
+      password: user.password,
+    });
+
+    if (res?.error) {
+      toast(res.error);
+    }
+
+    router.push("/cart");
+  };
+
   return (
     <div className=" container w-full">
       <div className="flex h-full w-full flex-col items-center justify-center gap-4">
@@ -13,22 +52,49 @@ function SignInPage() {
           </p>
         </div>
 
-        <form action="" className="flex w-full flex-col gap-4 md:w-3/4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
-          />
+        <form
+          className="flex w-full flex-col gap-4 md:w-3/4"
+          onSubmit={handleSubmit(onsubmit)}
+        >
+          <div>
+            <label htmlFor="email" className="text-lg text-primary">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
+          </div>
 
-          <Button className="w-full rounded-md bg-primary p-2 text-lg text-white">
+          <div>
+            <label htmlFor="password" className="text-lg  text-primary">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
+              {...register("password")}
+            />
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
+          </div>
+
+          <Button
+            className="w-full rounded-md bg-primary p-2 py-4 text-lg text-white"
+            disabled={isSubmitting}
+          >
             Sign In
           </Button>
-          <p className="text-gray-600">
+          <p className="text-center text-gray-600">
             Don&apos;t have an account yet ?{" "}
             <Link href="/signup" className="text-primary">
               Sign Up

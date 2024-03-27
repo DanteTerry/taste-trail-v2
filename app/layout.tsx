@@ -7,6 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import StoreProvider from "@/components/StoreProvider";
+import SessionProviders from "@/components/SessionProvider";
 
 const spaceSpace_Grotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -29,17 +30,19 @@ export default function RootLayout({
       <body
         className={`${spaceSpace_Grotesk.className} w-screen overflow-x-hidden`}
       >
-        <StoreProvider>
-          <Header />
-          <MobileNav />
-          <main>
-            <Sidebar className="hidden h-full bg-white lg:fixed lg:pt-20" />
-            <section className={cn("h-full pt-[65px] lg:pl-[128px]")}>
-              {children}
-            </section>
-          </main>
-          <Toaster />
-        </StoreProvider>
+        <SessionProviders>
+          <StoreProvider>
+            <Header />
+            <MobileNav />
+            <main>
+              <Sidebar className="hidden h-full bg-white lg:fixed lg:pt-20" />
+              <section className={cn("h-full pt-[65px] lg:pl-[128px]")}>
+                {children}
+              </section>
+            </main>
+            <Toaster />
+          </StoreProvider>
+        </SessionProviders>
       </body>
     </html>
   );

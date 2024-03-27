@@ -3,7 +3,7 @@ import React from "react";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid h-[90vh] w-full px-3 py-2 md:grid-cols-2">
+    <div className="grid h-[70vh] w-full overflow-hidden px-3 py-2 md:h-[92.5vh] md:grid-cols-2">
       <div className="hidden w-full overflow-hidden md:flex">
         <Image
           src={"/icons/signup.jpg"}

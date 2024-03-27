@@ -1,4 +1,4 @@
-import { CheckoutSchema } from "@/lib/validation";
+import { CheckoutSchema, SignInSchema, SignUpSchema } from "@/lib/validation";
 import { z } from "zod";
 
 export interface IMenuItem {
@@ -13,4 +13,8 @@ export interface IMenuItem {
   category: string;
 }
 
-export type Checkout = z.infer<typeof CheckoutSchema>;
+export type TCheckout = z.infer<typeof CheckoutSchema>;
+
+export type TSignUp = z.infer<typeof SignUpSchema>;
+
+export type TSignIn = z.infer<typeof SignInSchema>;

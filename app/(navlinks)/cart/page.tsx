@@ -7,7 +7,7 @@ import { CheckoutSchema } from "@/lib/validation";
 import CheckoutCartItem from "@/components/CheckoutCartItem";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Checkout, IMenuItem } from "@/types/types";
+import { TCheckout, IMenuItem } from "@/types/types";
 
 function CartPage() {
   const [cart, setCart] = useState<IMenuItem[]>([]);
@@ -33,16 +33,15 @@ function CartPage() {
     register,
     formState: { errors, isSubmitting },
     handleSubmit,
-  } = useForm<Checkout>({
+  } = useForm<TCheckout>({
     resolver: zodResolver(CheckoutSchema),
   });
 
-  const onSubmit = (data: Checkout) => {
+  const onSubmit = (data: TCheckout) => {
     const orderData = {
       ...data,
       cart,
     };
-  
   };
 
   const renderCartItems = () => {
