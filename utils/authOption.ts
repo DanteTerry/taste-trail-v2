@@ -80,7 +80,7 @@ export const authOptions: AuthOptions = {
           };
 
           const userNew = await UserModel.create(newUser);
-          if (userNew) {
+          if (userNew.name === name) {
             return user;
           }
         } catch (error: any) {
@@ -103,11 +103,10 @@ export const authOptions: AuthOptions = {
         session.user.email = token.email;
         session.user.name = token.name;
       }
-      console.log(session);
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || "your-secret",
+  secret: process.env.NEXTAUTH_SECRET as string,
   pages: {
     signIn: "/signin",
   },

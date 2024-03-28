@@ -3,27 +3,25 @@ import React, { useEffect } from "react";
 import Card from "./Card";
 import Image from "next/image";
 import { cuisineImg } from "@/constants/constant";
-import { getMenu } from "@/utils/menuRequestHandler";
+
 import { IMenuItem } from "@/types/types";
-import { useDispatch, useSelector } from "react-redux";
-import { setMenu } from "@/utils/redux/slices/menuSlice";
+import { getMenu } from "@/utils/menuRequestHandler";
+import { useMenuStore } from "@/lib/store/menu-store";
 
 function HomeFood() {
-  const dispatch = useDispatch();
-
-  function fetchData() {
-    getMenu().then((data) => {
-      dispatch(setMenu(data));
-    });
-  }
+  const setMenu = useMenuStore((state) => state.setMenu);
+  const homeMenu = useMenuStore((state) => state.menu);
 
   useEffect(() => {
-    fetchData();
+    const fetchMenu = async () => {
+      const res = await getMenu();
+      setMenu(res);
+    };
+
+    fetchMenu();
   }, []);
 
-  const homeMenu: IMenuItem[] = useSelector((state: any) => state.menu);
-
-  const homeMenuData = [...homeMenu].slice(0, 4);
+  const homeMenuData = homeMenu.slice(0, 4);
 
   return (
     <div className=" bg-neutral-100 p-4 py-10 md:px-16">

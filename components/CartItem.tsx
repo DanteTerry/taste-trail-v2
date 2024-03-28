@@ -3,57 +3,35 @@ import React from "react";
 import { Button } from "./ui/button";
 import { IMenuItem } from "@/types/types";
 import { Trash2 } from "lucide-react";
+import { useCartStore } from "@/lib/store/cart-store";
+import { useMenuStore } from "@/lib/store/menu-store";
 
 interface CartItemProps {
   item: IMenuItem;
-  handleQuantityChange: (itemId: string, newQuantity: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const { _id, name, price, image, cuisine, quantity } = item;
 
   if (!_id) throw new Error("Item id is required");
 
-  const handleIncrement = () => {
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const changeMenu = useMenuStore((state) => state.changeMenu);
+
+  const handleIncreaseQuantity = () => {
     if (quantity < 5) {
-      handleQuantityChange(_id, quantity + 1);
-      const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-      const updatedCart = cartData.map((cartItem: IMenuItem) =>
-        cartItem._id === _id
-          ? { ...cartItem, quantity: quantity + 1 }
-          : cartItem,
-      );
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      increaseQuantity(item);
     }
   };
 
-  const handleDelete = () => {
-    handleQuantityChange(_id, 0);
-
-    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-
-    const updatedCart = cartData.filter(
-      (cartItem: IMenuItem) => cartItem._id !== _id,
-    );
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 0) {
-      handleQuantityChange(_id, quantity - 1);
-
-      //update the cart to the recent quantity if quantity === 0  Delete the item from the cart if the quantity becomes 0
-
-      const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-
-      const updatedCart = cartData
-        .map((cartItem: IMenuItem) =>
-          cartItem._id === _id
-            ? { ...cartItem, quantity: quantity - 1 }
-            : cartItem,
-        )
-        .filter((cartItem: IMenuItem) => cartItem.quantity > 0);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const handleDecreaseQuantity = () => {
+    if (quantity <= 1) {
+      removeFromCart(item);
+      changeMenu({ ...item, isInCart: false });
+    } else {
+      decreaseQuantity(item);
     }
   };
 
@@ -84,16 +62,27 @@ const CartItem: React.FC<CartItemProps> = ({ item, handleQuantityChange }) => {
           className="w-max self-end"
           variant={"ghost"}
           size={"sm"}
-          onClick={handleDelete}
+          onClick={() => {
+            changeMenu({ ...item, isInCart: false });
+            removeFromCart(item);
+          }}
         >
           <Trash2 size={"20px"} />
         </Button>
         <div className="flex  w-[110px] items-center  justify-between">
-          <Button size="sm" className="text-2xl" onClick={handleDecrement}>
+          <Button
+            size="sm"
+            className="text-2xl"
+            onClick={handleDecreaseQuantity}
+          >
             -
           </Button>
           <span className="text-xl font-semibold">{quantity}</span>
-          <Button size="sm" onClick={handleIncrement} className="text-2xl">
+          <Button
+            size="sm"
+            onClick={handleIncreaseQuantity}
+            className="text-2xl"
+          >
             +
           </Button>
         </div>

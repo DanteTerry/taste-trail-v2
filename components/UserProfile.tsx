@@ -9,15 +9,13 @@ import { Button } from "./ui/button";
 function UserProfile() {
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <div className="flex">
       {session ? (
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2">
             <Image
-              src={"/icons/profile.png"}
+              src={session?.user?.image ?? "/icons/avatar.svg"}
               width={30}
               height={30}
               alt="avatar"

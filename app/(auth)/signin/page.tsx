@@ -33,10 +33,8 @@ function SignInPage() {
     });
 
     if (res?.error) {
-      toast(res.error);
+      toast("Invalid Email or Password");
     }
-
-    reset();
   };
 
   return (

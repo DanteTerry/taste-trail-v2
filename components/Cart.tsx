@@ -1,36 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CartItem from "./CartItem";
 import { cn } from "@/lib/utils";
-import { IMenuItem } from "@/types/types";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { SheetClose } from "@/components/ui/sheet";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { useCartStore } from "@/lib/store/cart-store";
 
 function Cart() {
-  const [cart, setCart] = useState<IMenuItem[]>([]);
+  const cart = useCartStore((state) => state.cart);
   const { data: session } = useSession();
 
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const cartData = JSON.stringify(cart);
-
-  useEffect(() => {
-    const cartData = localStorage.getItem("cart");
-    if (cartData) {
-      setCart(JSON.parse(cartData));
-    }
-  }, [cartData]);
-
-  const handleQuantityChange = (itemId: string, newQuantity: number) => {
-    setCart((prevCartItems) =>
-      prevCartItems.map((item) =>
-        item._id === itemId ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
-  };
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
@@ -57,13 +41,7 @@ function Cart() {
                 Cart is empty
               </h3>
             ) : (
-              cart.map((item, index) => (
-                <CartItem
-                  handleQuantityChange={handleQuantityChange}
-                  key={index}
-                  item={item}
-                />
-              ))
+              cart.map((item, index) => <CartItem key={index} item={item} />)
             )}
           </div>
         )}
@@ -129,7 +107,12 @@ function Cart() {
               className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
               onClick={() => {
                 if (!session) {
-                  toast("Please sign in to add items to cart");
+                  toast.error("Please sign in to add items to cart");
+                  return;
+                }
+
+                if (cart.length === 0) {
+                  toast.error("Please add items to cart before checkout");
                   return;
                 }
                 setStep(2);

@@ -2,10 +2,8 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { IMenuItem } from "@/types/types";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/utils/redux/store/store";
-import { setMenu } from "@/utils/redux/slices/menuSlice";
+import { useCartStore } from "@/lib/store/cart-store";
+import { useMenuStore } from "@/lib/store/menu-store";
 
 interface CardProps {
   menuData: IMenuItem;
@@ -13,44 +11,19 @@ interface CardProps {
 
 function Card({ menuData }: CardProps) {
   const { name, image, price, description, isInCart } = menuData;
-  const menu = useSelector((state: RootState) => state.menu);
-  const dispatch = useDispatch();
+
+  const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const changeMenu = useMenuStore((state) => state.changeMenu);
 
   function handleAddToCart() {
-    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-    const isItemInCart = cartData.some(
-      (item: IMenuItem) => item._id === menuData._id,
-    );
-
-    if (!isItemInCart) {
-      cartData.push({ ...menuData, isInCart: true });
-      localStorage.setItem("cart", JSON.stringify(cartData));
-      // find the current item in menu and set isInCart to true
-      const updatedMenu = menu.map((item: IMenuItem) =>
-        item._id === menuData._id ? { ...item, isInCart: true } : item,
-      );
-      dispatch(setMenu(updatedMenu));
-    } else {
-      // Item already exists in cart, do nothing
-    }
+    const InCart = cart.some((item: IMenuItem) => item._id === menuData._id);
+    if (InCart) return;
+    changeMenu({ ...menuData, isInCart: true });
+    addToCart(menuData);
   }
 
-  useEffect(() => {
-    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
-    const isItemInCart = cartData.some(
-      (item: IMenuItem) => item._id === menuData._id,
-    );
-    if (isItemInCart) {
-      // Item is already in cart, set isInCart to true
-      cartData.forEach((item: IMenuItem) => {
-        if (item._id === menuData._id) {
-          item.isInCart = true;
-        } else {
-          item.isInCart = false;
-        }
-      });
-    }
-  }, [menuData._id]);
+  console.log(cart);
 
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
