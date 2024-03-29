@@ -22,6 +22,19 @@ function Cart() {
 
   const tax = subtotal * 0.1;
 
+  const handlePayment = async () => {
+    const res = await fetch("http://localhost:3000/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItem: cart }),
+    });
+
+    const data = await res.json();
+    if (data.url) router.push(data.url);
+  };
+
   return (
     <div className="h-full py-4 md:p-4">
       <h3 className="border-b-2  px-4 pb-2 text-xl font-semibold md:px-0">
@@ -94,7 +107,7 @@ function Cart() {
               <SheetClose className="w-full" asChild>
                 <Button
                   className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
-                  onClick={() => router.push("/orders")}
+                  onClick={handlePayment}
                 >
                   Proceed to payment
                 </Button>

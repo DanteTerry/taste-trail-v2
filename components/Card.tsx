@@ -23,8 +23,6 @@ function Card({ menuData }: CardProps) {
     addToCart(menuData);
   }
 
-  console.log(cart);
-
   return (
     <div className="w-[300px] rounded-xl bg-white p-4">
       <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
