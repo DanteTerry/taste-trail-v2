@@ -3,7 +3,7 @@ import DiningDropDown from "./DiningDropDown";
 import NavLinks from "./NavLinks";
 import UserProfile from "./UserProfile";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "./Sidebar";
@@ -31,19 +31,21 @@ function Header() {
         </Link>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-5">
         <NavLinks />
-        <DiningDropDown />
+        {/* <DiningDropDown /> */}
+        <UserProfile />
         <Sheet>
           <SheetTrigger asChild>
-            <Button>Cart</Button>
+            <Button>
+              <ShoppingCart />
+            </Button>
           </SheetTrigger>
           <SheetContent className="xs:max-w-full p-0 sm:max-w-full md:max-w-[500px] ">
             <Cart />
           </SheetContent>
         </Sheet>
         {/* <HeaderTime /> */}
-        <UserProfile />
       </div>
     </header>
   );

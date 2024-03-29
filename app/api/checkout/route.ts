@@ -63,7 +63,5 @@ export const POST = async (req: any) => {
     cancel_url: "http://localhost:3000/cart",
   });
 
-  console.log(session);
-
   return NextResponse.json({ url: session.url });
 };

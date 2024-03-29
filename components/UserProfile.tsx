@@ -5,6 +5,15 @@ import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function UserProfile() {
   const { data: session } = useSession();
@@ -12,19 +21,24 @@ function UserProfile() {
   return (
     <div className="flex">
       {session ? (
-        <div className="flex items-center gap-5">
-          <div className="flex items-center gap-2">
-            <Image
-              src={session?.user?.image ?? "/icons/avatar.svg"}
-              width={30}
-              height={30}
-              alt="avatar"
-            />
-            <p>{session?.user?.name ?? "Unknown"}</p>
-          </div>
-
-          <Button onClick={() => signOut()}>Sign Out</Button>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <button>Profile</button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <button onClick={() => signOut()}>Sign Out</button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       ) : (
         <Link href="/signin">
           <Button>sign in</Button>
