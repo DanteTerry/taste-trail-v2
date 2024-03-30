@@ -9,7 +9,7 @@ function OrdersCard() {
     <div className="w-[350px] rounded-xl border bg-white px-4 py-4 shadow-md">
       <Badge className="bg-green-500">order id: #4545</Badge>
 
-      <div className="mt-3 flex h-[150px] flex-col gap-3 overflow-y-auto px-2">
+      <div className="scrollbar-thin scrollbar-thumb-primary scrollbar-track-white mt-3 flex h-[150px] flex-col gap-3 overflow-y-scroll px-2">
         <OrderItem />
         <Separator className="" />
         <OrderItem />

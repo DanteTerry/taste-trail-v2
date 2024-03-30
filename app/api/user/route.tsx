@@ -14,6 +14,7 @@ export const GET = async () => {
     return new Response(error.message, { status: 500 });
   }
 };
+
 export const POST = async (req: Request, res: Response) => {
   try {
     await connectDB();

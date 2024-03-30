@@ -11,9 +11,9 @@ const getActiveProducts = async () => {
 };
 
 export const POST = async (req: any) => {
-  const { cartItem } = await req.json();
+  const { orderData } = await req.json();
 
-  const data: IMenuItem[] = cartItem;
+  const data: IMenuItem[] = orderData.items;
 
   let activeProducts = await getActiveProducts();
   try {
@@ -27,10 +27,10 @@ export const POST = async (req: any) => {
         const prod = await stripe.products.create({
           name: item.name,
           images: [item.image],
-          default_price_data: {
-            currency: "czk",
-            unit_amount: item.price * 100,
-          },
+          metadata: { productId: item._id },
+          unit_amount: item.price * 100,
+          currency: "czk",
+          quantity: item.quantity,
         });
       }
     }
@@ -60,6 +60,8 @@ export const POST = async (req: any) => {
     mode: "payment",
     success_url: "http://localhost:3000/orders",
     cancel_url: "http://localhost:3000/cart",
+    customer_email: "arpity6@gmail.com",
+    client_reference_id: "123",
   });
 
   return NextResponse.json({ url: session.url });

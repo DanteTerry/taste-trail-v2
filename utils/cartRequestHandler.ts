@@ -3,7 +3,7 @@ import { IMenuItem } from "@/types/types";
 export const getCartItems = async (): Promise<IMenuItem[]> => {
   try {
     const res = await fetch(
-      `${process.env.LOCALHOST || "http://localhost:3000/"}/api/cart`,
+      `${process.env.NEXT_PUBLIC_LOCALHOST || "http://localhost:3000/"}/api/cart`,
       {
         cache: "no-store",
       },
@@ -37,4 +37,11 @@ export const createCartItems = async (item: IMenuItem) => {
   } catch (error: any) {
     console.log(error.message);
   }
+};
+
+// get the response from the stripe hook
+
+export const getHookResponse = async () => {
+  const res = await fetch(`http://localhost:3000/api/order/webhook`);
+  return res;
 };

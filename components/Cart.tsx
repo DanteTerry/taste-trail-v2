@@ -8,10 +8,31 @@ import { SheetClose } from "@/components/ui/sheet";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useCartStore } from "@/lib/store/cart-store";
+import { useForm } from "react-hook-form";
+import { IMenuItem } from "@/types/types";
+import { getUser } from "@/utils/userRequestHandler";
+
+// user type from data coming from database
+
+interface IUser {
+  _id: string;
+  name: string;
+  email: string;
+  password?: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 
 function Cart() {
   const cart = useCartStore((state) => state.cart);
   const { data: session } = useSession();
+
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm();
 
   const router = useRouter();
   const [step, setStep] = useState(1);
@@ -22,18 +43,49 @@ function Cart() {
 
   const tax = subtotal * 0.1;
 
-  const handlePayment = async () => {
-    const res = await fetch("http://localhost:3000/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const handlePayment = async () => {};
+
+  const handleData = async (data: any) => {
+    const { name, email, phone, address, city, pinCode } = data;
+    const user = await getUser();
+
+    const currentUser = user.find(
+      (user: IUser) => user.email === session?.user?.email,
+    );
+
+    const order = {
+      user: {
+        userId: currentUser?._id,
+        name,
+        email,
+        phone,
+        address,
+        city,
+        pinCode,
       },
-      body: JSON.stringify({ cartItem: cart }),
-    });
+      items: cart,
+      amount: {
+        subtotal,
+        tax,
+        total: subtotal + tax,
+      },
+    };
 
-    const data = await res.json();
+    try {
+      const res = await fetch("http://localhost:3000/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ orderData: order }),
+      });
 
-    if (data.url) router.push(data.url);
+      const data = await res.json();
+
+      if (data.url) router.push(data.url);
+    } catch (error) {
+      console.error("An error occurred during payment:", error);
+    }
   };
 
   return (
@@ -82,37 +134,82 @@ function Cart() {
               </div>
             </div>
           ) : (
-            <form className="flex h-full flex-col justify-between">
+            <form
+              className="flex h-full flex-col justify-between"
+              onSubmit={handleSubmit(handleData)}
+            >
               <div className="flex h-full flex-col  gap-2">
                 <input
                   type="text"
                   placeholder="Name"
                   className="rounded-lg border-2 border-neutral-200 p-3"
+                  {...register("name", { required: true })}
+                  defaultValue={session?.user?.name || ""}
                 />
+                {errors.name && (
+                  <span className="text-red-500">This field is required</span>
+                )}
                 <input
                   type="text"
                   placeholder="Email"
                   className="rounded-lg border-2 border-neutral-200 p-3"
+                  {...register("email", { required: true })}
+                  defaultValue={session?.user?.email || ""}
                 />
+                {errors.email && (
+                  <span className="text-red-500">This field is required</span>
+                )}
                 <input
                   type="text"
                   placeholder="Phone"
                   className="rounded-lg border-2 border-neutral-200 p-3"
+                  {...register("phone", { required: true })}
+                  defaultValue={8840320906}
                 />
+                {errors.phone && (
+                  <span className="text-red-500">This field is required</span>
+                )}
                 <input
                   type="text"
-                  placeholder="Address"
+                  placeholder="Address line"
                   className="rounded-lg border-2 border-neutral-200 p-3"
+                  {...register("address", { required: true })}
+                  defaultValue={"buddheshwar"}
                 />
+                {errors.address && (
+                  <span className="text-red-500">This field is required</span>
+                )}
+
+                <div className="flex gap-3">
+                  <input
+                    type="text"
+                    placeholder="City"
+                    className="w-1/2 rounded-lg border-2 border-neutral-200 p-3"
+                    {...register("city", { required: true })}
+                    defaultValue={"lucknow"}
+                  />
+                  {errors.city && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                  <input
+                    type="text"
+                    placeholder="Pin code"
+                    className="w-1/2 rounded-lg border-2 border-neutral-200 p-3"
+                    {...register("pinCode", { required: true })}
+                    defaultValue={226001}
+                  />
+                  {errors.pinCode && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
               </div>
-              <SheetClose className="w-full" asChild>
-                <Button
-                  className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
-                  onClick={handlePayment}
-                >
-                  Proceed to payment
-                </Button>
-              </SheetClose>
+
+              <Button
+                disabled={isSubmitting}
+                className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
+              >
+                Proceed to payment
+              </Button>
             </form>
           )}
 
