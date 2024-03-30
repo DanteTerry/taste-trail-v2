@@ -32,6 +32,7 @@ function Cart() {
     });
 
     const data = await res.json();
+
     if (data.url) router.push(data.url);
   };
 
@@ -46,7 +47,7 @@ function Cart() {
           <div
             className={cn(
               "mt-5 flex  flex-col gap-5 rounded-lg border-b-2 bg-neutral-100 px-2 py-4 md:px-4 ",
-              cart.length > 3 && "h-[370px] overflow-y-scroll",
+              cart.length > 3 && "h-[370px] overflow-y-auto",
             )}
           >
             {cart.length === 0 ? (
@@ -117,6 +118,7 @@ function Cart() {
 
           {step === 1 && (
             <Button
+              disabled={cart.length === 0}
               className="mt-3 w-full rounded-lg bg-primary p-3 text-lg text-white md:mt-5"
               onClick={() => {
                 if (!session) {

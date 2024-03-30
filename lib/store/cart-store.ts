@@ -1,8 +1,9 @@
 import { IMenuItem } from "@/types/types";
+import { useSession } from "next-auth/react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type TCart = {
+  type TCart = {
   cart: IMenuItem[];
   addToCart: (item: IMenuItem) => void;
   removeFromCart: (item: IMenuItem) => void;

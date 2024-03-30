@@ -17,7 +17,7 @@ function DiningDropDown() {
         </SelectTrigger>
         <SelectContent className="text-primary">
           <SelectItem value={"EUR"}>EUR</SelectItem>
-          <SelectItem value={"CZK"}>CZK</SelectItem>
+          <SelectItem value={"₹"}>₹</SelectItem>
           <SelectItem value={"INR"}>INR</SelectItem>
         </SelectContent>
       </Select>

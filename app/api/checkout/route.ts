@@ -26,7 +26,6 @@ export const POST = async (req: any) => {
       if (stripeProduct === undefined) {
         const prod = await stripe.products.create({
           name: item.name,
-          description: item.description,
           images: [item.image],
           default_price_data: {
             currency: "czk",
@@ -41,23 +40,23 @@ export const POST = async (req: any) => {
 
   activeProducts = await getActiveProducts();
 
-  let stripeProducts: any = [];
+  let stripeItems: any = [];
 
-  for (const item of data) {
+  for (const product of data) {
     const stripeProduct = activeProducts?.find(
-      (prod: any) => item?.name?.toLowerCase() === prod?.name?.toLowerCase(),
+      (prod: any) => product?.name?.toLowerCase() === prod?.name?.toLowerCase(),
     );
 
     if (stripeProduct) {
-      stripeProducts.push({
+      stripeItems.push({
         price: stripeProduct?.default_price,
-        quantity: item.quantity,
+        quantity: product?.quantity,
       });
     }
   }
 
   const session = await stripe.checkout.sessions.create({
-    line_items: stripeProducts,
+    line_items: stripeItems,
     mode: "payment",
     success_url: "http://localhost:3000/orders",
     cancel_url: "http://localhost:3000/cart",

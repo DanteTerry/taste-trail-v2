@@ -12,11 +12,10 @@ function NewHero() {
             Taste-Trail
           </span>
         </h1>
-        <p className=" md:leading-widest w-3/4 text-xl md:text-xl">
-          Your one-stop culinary destination, where you can delight in an
-          exquisite array of flavors, from timeless classics to innovative
-          creations. Join us and elevate your dining experience to new heights
-          in one place.
+        <p className=" md:leading-widest w-3/4 text-xl text-muted-foreground md:text-xl">
+          Embark on a culinary journey with Taste Trail! Explore an enticing
+          array of flavors, from cherished classics to daring innovations, all
+          conveniently delivered to your doorstep. Join us today!
         </p>
 
         <div className="mb-5 flex gap-5">
@@ -30,7 +29,7 @@ function NewHero() {
           <Button
             size={"lg"}
             variant={"outline"}
-            className=" rounded-lg px-8 py-3 text-primary md:text-lg"
+            className=" rounded-lg border-primary px-8 py-3 text-primary md:text-lg"
           >
             Learn More
           </Button>
@@ -39,7 +38,7 @@ function NewHero() {
 
       <div className="hidden w-full overflow-hidden md:flex">
         <Image
-          src={"/icons/hero.jpg"}
+          src={"/icons/hero2.jpg"}
           alt="food image"
           sizes="100%"
           height={0}

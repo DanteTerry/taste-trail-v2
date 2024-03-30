@@ -24,7 +24,9 @@ function UserProfile() {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage
+                src={session?.user?.image || "https://github.com/shadcn.png"}
+              />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
