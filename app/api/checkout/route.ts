@@ -27,10 +27,13 @@ export const POST = async (req: any) => {
         const prod = await stripe.products.create({
           name: item.name,
           images: [item.image],
-          metadata: { productId: item._id },
-          unit_amount: item.price * 100,
-          currency: "czk",
-          quantity: item.quantity,
+          default_price_data: {
+            currency: "czk",
+            unit_amount: item.price * 100,
+          },
+          metadata: {
+            productId: item._id,
+          },
         });
       }
     }
@@ -40,28 +43,33 @@ export const POST = async (req: any) => {
 
   activeProducts = await getActiveProducts();
 
-  let stripeItems: any = [];
+  let stripeProducts: any = [];
 
-  for (const product of data) {
+  for (const item of data) {
     const stripeProduct = activeProducts?.find(
-      (prod: any) => product?.name?.toLowerCase() === prod?.name?.toLowerCase(),
+      (prod: any) => item?.name?.toLowerCase() === prod?.name?.toLowerCase(),
     );
 
     if (stripeProduct) {
-      stripeItems.push({
+      stripeProducts.push({
         price: stripeProduct?.default_price,
-        quantity: product?.quantity,
+        quantity: item.quantity,
       });
     }
   }
 
   const session = await stripe.checkout.sessions.create({
-    line_items: stripeItems,
+    line_items: stripeProducts,
     mode: "payment",
     success_url: "http://localhost:3000/orders",
     cancel_url: "http://localhost:3000/cart",
-    customer_email: "arpity6@gmail.com",
-    client_reference_id: "123",
+    customer_email: orderData.user.email,
+    client_reference_id: orderData.user.userId,
+    metadata: {
+      shipping_address: orderData.user.address,
+      shipping_city: orderData.user.city,
+      shipping_pinCode: orderData.user.pinCode,
+    },
   });
 
   return NextResponse.json({ url: session.url });

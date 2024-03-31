@@ -1,3 +1,4 @@
+import Order from "@/models/OrderModel";
 import { NextResponse } from "next/server";
 
 const Stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -10,11 +11,14 @@ const getCartItem = async (line_items: any) => {
       for (const item of line_items.data) {
         const product = await Stripe.products.retrieve(item.price.product);
 
+        const productId = product.metadata.productId;
+
         items.push({
+          menuData: productId,
           name: product.name,
-          price: product.default_price,
           quantity: item.quantity,
           images: product.images[0],
+          price: item.price.unit_amount / 100,
         });
       }
 
@@ -56,11 +60,28 @@ export const POST = async (req: Request) => {
       event.data.object.id,
     );
 
-    const items = await getCartItem(line_items);
+    const orderItems = await getCartItem(line_items);
 
-    console.log(items);
+    const userId = session.client_reference_id;
+    const amountPaid = session.amount_total / 100;
+    const paymentInfo = {
+      id: session.payment_intent,
+      amountPaid,
+      status: session.payment_status,
+    };
+    const orderData = {
+      orderId: Math.floor(Math.random() * 9000) + 1000,
+      user: userId,
+      paymentInfo,
+      orderItems,
+      shippinginfo: {
+        address: session.metadata.shipping_address,
+        city: session.metadata.shipping_city,
+        pinCode: session.metadata.shipping_pinCode,
+      },
+    };
 
-    console.log("Payment was successful");
+    const order = await Order.create(orderData);
   }
 
   return NextResponse.json({ received: true });
