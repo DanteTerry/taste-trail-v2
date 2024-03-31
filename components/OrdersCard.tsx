@@ -66,7 +66,7 @@ function OrdersCard({ orderData }: { orderData: IOrder }) {
         </div>
 
         <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
-          <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
+          <h3 className="text-lg font-semibold text-black">Delivery Charges</h3>
           <p className="font-semibold text-primary "> czk {50}</p>
         </div>
 

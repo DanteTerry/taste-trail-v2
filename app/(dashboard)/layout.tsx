@@ -3,9 +3,9 @@ import FindTaste from "@/components/FindTaste";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="h-full w-full lg:pt-4">
+    <section className="relative h-full w-full  bg-neutral-200 lg:pt-4">
       <FindTaste />
-      <section className="p-4">{children}</section>
+      <section className="pt-12">{children}</section>
     </section>
   );
 }
