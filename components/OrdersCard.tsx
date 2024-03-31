@@ -3,19 +3,22 @@ import { Badge } from "@/components/ui/badge";
 import OrderItem from "./OrderItem";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "./ui/button";
+import { IOrder } from "@/app/(navlinks)/orders/page";
 
-function OrdersCard() {
+function OrdersCard({ orderData }: { orderData: IOrder }) {
   return (
     <div className="w-[350px] rounded-xl border bg-white px-4 py-4 shadow-md">
-      <Badge className="bg-green-500">order id: #4545</Badge>
+      <Badge className="bg-green-500">
+        order id: {`#${orderData.orderId}`}
+      </Badge>
 
-      <div className="scrollbar-thin scrollbar-thumb-primary scrollbar-track-white mt-3 flex h-[150px] flex-col gap-3 overflow-y-scroll px-2">
+      <div className="mt-3 flex h-[150px] flex-col gap-3 overflow-y-scroll px-2 scrollbar-thin scrollbar-track-white scrollbar-thumb-primary">
         <OrderItem />
-        <Separator className="" />
+        <Separator />
         <OrderItem />
-        <Separator className="" />
+        <Separator />
         <OrderItem />
-        <Separator className="" />
+        <Separator />
       </div>
       <div className="mt-3 flex justify-between text-lg">
         <h3 className="text-lg font-semibold text-black">Order Date</h3>
