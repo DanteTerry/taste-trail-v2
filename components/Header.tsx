@@ -38,8 +38,8 @@ function Header() {
         {/* <DiningDropDown /> */}
         <UserProfile />
         <Sheet>
-          <SheetTrigger asChild>
-            <Button className="flex gap-2">
+          <SheetTrigger asChild className="hidden md:flex">
+            <Button className="hidden gap-2  md:flex">
               <ShoppingCart /> {cart.length > 0 && `(${cart.length})`}
             </Button>
           </SheetTrigger>

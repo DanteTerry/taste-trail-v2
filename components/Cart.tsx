@@ -43,8 +43,6 @@ function Cart() {
 
   const tax = subtotal * 0.1;
 
-  const handlePayment = async () => {};
-
   const handleData = async (data: any) => {
     const { name, email, phone, address, city, pinCode } = data;
     const user = await getUser();
@@ -118,12 +116,14 @@ function Cart() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between text-lg">
                 <h3 className="text-lg font-semibold text-black">Sub Total</h3>
-                <p className="font-semibold text-primary ">₹ {subtotal}</p>
+                <p className="font-semibold text-primary ">czk {subtotal}</p>
               </div>
 
               <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
-                <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
-                <p className="font-semibold text-primary "> ₹ {tax}</p>
+                <h3 className="text-lg font-semibold text-black">
+                  Delivery Charges
+                </h3>
+                <p className="font-semibold text-primary "> czk {50}</p>
               </div>
 
               <div className="flex justify-between text-lg md:mt-3">

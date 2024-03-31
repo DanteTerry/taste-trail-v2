@@ -4,29 +4,57 @@ import OrderItem from "./OrderItem";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "./ui/button";
 import { IOrder } from "@/app/(navlinks)/orders/page";
+import { IMenuItem } from "@/types/types";
+import { cn } from "@/lib/utils";
 
 function OrdersCard({ orderData }: { orderData: IOrder }) {
+  const newDate = new Date(orderData.createdAt);
+  const time = newDate.toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const date = newDate.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+
+  const subtotal = orderData.orderItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+
+  const tax = subtotal * 0.1;
   return (
     <div className="w-[350px] rounded-xl border bg-white px-4 py-4 shadow-md">
-      <Badge className="bg-green-500">
-        order id: {`#${orderData.orderId}`}
-      </Badge>
+      <div className="flex justify-between">
+        <Badge className="bg-green-500 capitalize">
+          order id: {`#${orderData.orderId}`}
+        </Badge>
 
-      <div className="mt-3 flex h-[150px] flex-col gap-3 overflow-y-scroll px-2 scrollbar-thin scrollbar-track-white scrollbar-thumb-primary">
-        <OrderItem />
-        <Separator />
-        <OrderItem />
-        <Separator />
-        <OrderItem />
-        <Separator />
+        <Badge className="bg-primary capitalize">{"status : Preparing"}</Badge>
+      </div>
+
+      <div
+        className={cn(
+          "mt-3 flex h-[150px] flex-col gap-3  px-2",
+          orderData.orderItems.length >= 3 &&
+            "overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-primary",
+        )}
+      >
+        {orderData.orderItems.map((item: IMenuItem, index: number) => (
+          <>
+            <OrderItem key={index} item={item} />
+            <Separator />
+          </>
+        ))}
       </div>
       <div className="mt-3 flex justify-between text-lg">
         <h3 className="text-lg font-semibold text-black">Order Date</h3>
-        <p className="font-semibold text-primary ">2022-01-01</p>
+        <p className="font-semibold text-primary ">{date}</p>
       </div>
       <div className="flex justify-between text-lg">
         <h3 className="text-lg font-semibold text-black">Order Time</h3>
-        <p className="font-semibold text-primary ">12:00 PM</p>
+        <p className="font-semibold text-primary ">{time}</p>
       </div>
 
       <Separator className="mt-2" />
@@ -34,17 +62,17 @@ function OrdersCard({ orderData }: { orderData: IOrder }) {
       <div className="mt-2">
         <div className="flex justify-between text-lg">
           <h3 className="text-lg font-semibold text-black">Sub Total</h3>
-          <p className="font-semibold text-primary ">₹ 200</p>
+          <p className="font-semibold text-primary ">czk {subtotal}</p>
         </div>
 
         <div className="flex justify-between border-b-2 border-dashed border-primary pb-3 text-lg">
           <h3 className="text-lg font-semibold text-black">Tax (10%)</h3>
-          <p className="font-semibold text-primary "> ₹ 20</p>
+          <p className="font-semibold text-primary "> czk {50}</p>
         </div>
 
         <div className="flex justify-between text-lg md:mt-3">
           <h3 className="text-lg font-semibold text-black">Total</h3>
-          <p className="font-semibold text-primary "> ₹ 220</p>
+          <p className="font-semibold text-primary "> czk {subtotal + 50}</p>
         </div>
       </div>
 

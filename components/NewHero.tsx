@@ -8,11 +8,11 @@ function NewHero() {
       <div className=" flex w-full flex-col items-center justify-center gap-3 text-justify md:gap-5">
         <h1 className="text-3xl md:text-4xl">
           Welcome to{" "}
-          <span className="text-4xl font-semibold text-primary">
+          <span className="font-semibold text-primary md:text-4xl">
             Taste-Trail
           </span>
         </h1>
-        <p className=" md:leading-widest w-3/4 text-xl text-muted-foreground md:text-xl">
+        <p className=" md:leading-widest text-xl text-muted-foreground md:w-3/4 md:text-xl">
           Embark on a culinary journey with Taste Trail! Explore an enticing
           array of flavors, from cherished classics to daring innovations, all
           conveniently delivered to your doorstep. Join us today!

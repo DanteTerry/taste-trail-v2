@@ -19,6 +19,8 @@ export interface IOrder {
     city: string;
     pinCode: string;
   };
+
+  createdAt: string;
 }
 
 async function OrdersPage() {
@@ -29,7 +31,7 @@ async function OrdersPage() {
       <h1 className="text-center text-4xl font-semibold  text-primary ">
         Your Orders
       </h1>
-      <div className="mt-10 grid grid-cols-3 place-items-center">
+      <div className="mt-10 grid grid-cols-1 place-items-center gap-y-5 md:grid-cols-2 lg:grid-cols-3">
         {orders.map((order: IOrder, index: number) => (
           <OrdersCard key={index} orderData={order} />
         ))}

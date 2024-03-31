@@ -5,7 +5,7 @@ export interface IMenuItem {
   _id?: string;
   name: string;
   cuisine: string;
-  image: string;
+  images: string;
   price: number;
   description: string;
   isInCart: boolean;
