@@ -66,19 +66,8 @@ export const sideBarLinks: SideBarLinksProp[] = [
 export const selectOptions = [
   {
     placeHolder: "Sort",
-    title: [
-      "Popularity",
-      "Rating: High to Low",
-      "Cost: Low to High",
-      "Cost: High to Low",
-    ],
-    value: [
-      "popularity",
-      "priceHighToLow",
-      "priceLowToHigh",
-      "ratingHighToLow",
-      "ratingLowtoHigh",
-    ],
+    title: ["Popularity", "Cost: High to Low", "Cost: Low to High"],
+    value: ["popularity", "priceHighToLow", "priceLowToHigh"],
   },
   {
     placeHolder: "Cuisines",

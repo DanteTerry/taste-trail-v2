@@ -11,6 +11,7 @@ export interface IMenuItem {
   isInCart: boolean;
   quantity: number;
   category: string;
+  rating: number;
 }
 
 export type TCheckout = z.infer<typeof CheckoutSchema>;

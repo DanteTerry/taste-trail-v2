@@ -10,7 +10,7 @@ interface CardProps {
 }
 
 function Card({ menuData }: CardProps) {
-  const { name, image, price, description, isInCart } = menuData;
+  const { name, images, price, rating, description, isInCart } = menuData;
 
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
@@ -25,10 +25,10 @@ function Card({ menuData }: CardProps) {
 
   return (
     <div className="mx-auto w-[300px] rounded-xl bg-white p-4 md:mx-0">
-      <div className="h-[200px] w-[268px] overflow-hidden rounded-lg ">
+      <div className="relative h-[200px] w-[268px] overflow-hidden rounded-lg ">
         <div className="h-[200px] w-[268px] overflow-hidden">
           <Image
-            src={image || "/icons/indian.jpg"}
+            src={images || "/icons/indian.jpg"}
             alt="food"
             width={0}
             height={0}
@@ -36,6 +36,9 @@ function Card({ menuData }: CardProps) {
             className="h-full w-full overflow-hidden object-cover"
             priority={true}
           />
+        </div>
+        <div className="absolute right-2 top-2 rounded bg-primary p-1 text-white">
+          <p> ⭐ {rating}</p>
         </div>
       </div>
 
