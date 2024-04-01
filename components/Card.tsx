@@ -4,13 +4,15 @@ import { Button } from "./ui/button";
 import { IMenuItem } from "@/types/types";
 import { useCartStore } from "@/lib/store/cart-store";
 import { useMenuStore } from "@/lib/store/menu-store";
+import { Badge } from "./ui/badge";
 
 interface CardProps {
   menuData: IMenuItem;
 }
 
 function Card({ menuData }: CardProps) {
-  const { name, images, price, rating, description, isInCart } = menuData;
+  const { name, images, price, rating, description, cuisine, isInCart } =
+    menuData;
 
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
@@ -24,7 +26,7 @@ function Card({ menuData }: CardProps) {
   }
 
   return (
-    <div className="mx-auto w-[300px] rounded-xl bg-white p-4 md:mx-0">
+    <div className="mx-auto  w-[300px] rounded-xl bg-white p-4 md:mx-0">
       <div className="relative h-[200px] w-[268px] overflow-hidden rounded-lg ">
         <div className="h-[200px] w-[268px] overflow-hidden">
           <Image

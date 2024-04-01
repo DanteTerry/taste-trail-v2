@@ -17,7 +17,7 @@ async function FoodPage({
   const cuisine = searchParams.cuisine as string | undefined;
   const rating = searchParams.rating as string | undefined;
 
-  const mainCourse = await getData({
+  const mainCourse: IMenuItem[] = await getData({
     category: "Main Course",
     page,
     limit,

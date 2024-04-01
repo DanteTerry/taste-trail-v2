@@ -1,4 +1,11 @@
-import { Home, NotepadText, Sandwich, Pizza, Soup } from "lucide-react";
+import {
+  Home,
+  NotepadText,
+  Sandwich,
+  CakeSlice,
+  Pizza,
+  Soup,
+} from "lucide-react";
 
 import { SiBuymeacoffee } from "react-icons/si";
 import { GiSlicedBread } from "react-icons/gi";
@@ -57,9 +64,9 @@ export const sideBarLinks: SideBarLinksProp[] = [
     icon: SiBuymeacoffee,
   },
   {
-    href: "/bread",
-    label: "Bread",
-    icon: GiSlicedBread,
+    href: "/dessert",
+    label: "Dessert",
+    icon: CakeSlice,
   },
 ];
 

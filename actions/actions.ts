@@ -34,6 +34,12 @@ export const getData = async ({
     });
   }
 
+  pipeline.push({
+    $match: {
+      category: category,
+    },
+  });
+
   if (sort === "priceLowToHigh") {
     pipeline.push({
       $sort: {
