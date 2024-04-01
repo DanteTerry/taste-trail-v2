@@ -47,7 +47,7 @@ function Card({ menuData }: CardProps) {
       <div className="flex justify-between  gap-4 p-2">
         <h2 className="text-xl font-bold text-primary">{name}</h2>
         <p className="rounded-full bg-green-500 px-2 text-lg font-bold text-white">
-          ₹ {price}
+          czk {price}
         </p>
       </div>
 

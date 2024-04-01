@@ -40,7 +40,7 @@ async function AppetizerPage({
           <Link
             className="rounded-lg bg-primary px-5 py-2 text-lg text-white"
             href={{
-              pathname: "/main",
+              pathname: "/appetizer",
               query: {
                 ...(search ? { search } : {}),
                 page: page > 1 ? page - 1 : 1,
@@ -55,7 +55,7 @@ async function AppetizerPage({
           <Link
             className="rounded-lg bg-primary px-5 py-2 text-lg text-white"
             href={{
-              pathname: "/main",
+              pathname: "/appetizer",
               query: {
                 ...(search ? { search } : {}),
                 page: page + 1,
