@@ -1,6 +1,6 @@
 import React from "react";
 
-function BreadPage() {
+async function BreadPage() {
   return <div>BreadPage</div>;
 }
 

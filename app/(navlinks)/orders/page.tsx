@@ -3,7 +3,6 @@ import { IMenuItem } from "@/types/types";
 import { getOrder } from "@/utils/orderRequestHandler";
 import React from "react";
 
-// write interface for order
 export interface IOrder {
   _id: string;
   user: string;
@@ -31,8 +30,11 @@ async function OrdersPage() {
       <h1 className="text-center text-4xl font-semibold  text-primary ">
         Your Orders
       </h1>
-      <div className="mt-10 grid grid-cols-1 place-items-center gap-y-5 md:grid-cols-2 lg:grid-cols-3">
-        {orders.map((order: IOrder, index: number) => (
+      <div
+        className="mt-10 grid grid-cols-1 place-items-center gap-y-5
+       md:grid-cols-2 lg:grid-cols-3"
+      >
+        {orders?.map((order: IOrder, index: number) => (
           <OrdersCard key={index} orderData={order} />
         ))}
       </div>
