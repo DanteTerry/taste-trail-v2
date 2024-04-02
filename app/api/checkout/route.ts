@@ -61,8 +61,8 @@ export const POST = async (req: any) => {
   const session = await stripe.checkout.sessions.create({
     line_items: stripeProducts,
     mode: "payment",
-    success_url: "http://localhost:3000/orders",
-    cancel_url: "http://localhost:3000/cart",
+    success_url: `${process.env.NEXT_PUBLIC_LOCALHOST}/orders`,
+    cancel_url: `${process.env.NEXT_PUBLIC_LOCALHOST}/orders`,
     customer_email: orderData.user.email,
     client_reference_id: orderData.user.userId,
     metadata: {
