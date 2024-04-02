@@ -14,7 +14,7 @@ import { useCartStore } from "@/lib/store/cart-store";
 function Header() {
   const cart = useCartStore((state) => state.cart);
   return (
-    <header className="fixed top-0 z-50 flex w-screen items-center justify-between border-b-2 bg-white p-4 px-6 ">
+    <header className="fixed top-0 z-50 flex w-screen items-center justify-between border-b-2 bg-white p-4   md:px-6 ">
       <div className="flex items-center md:hidden ">
         <Sheet>
           <SheetTrigger>
@@ -35,7 +35,6 @@ function Header() {
 
       <div className="flex items-center gap-5">
         <NavLinks />
-        {/* <DiningDropDown /> */}
         <UserProfile />
         <Sheet>
           <SheetTrigger asChild className="hidden md:flex">
@@ -47,7 +46,6 @@ function Header() {
             <Cart />
           </SheetContent>
         </Sheet>
-        {/* <HeaderTime /> */}
       </div>
     </header>
   );

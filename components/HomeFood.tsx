@@ -51,7 +51,7 @@ function HomeFood() {
         Try our popular dishes
       </h2>
 
-      <div className="mt-5  flex flex-wrap items-center justify-center gap-4 md:mt-8">
+      <div className="mb-10 mt-5 flex flex-wrap items-center justify-center gap-4 md:mb-0 md:mt-8">
         {homeMenuData.map((menu: IMenuItem) => (
           <Card key={menu._id} menuData={menu} />
         ))}

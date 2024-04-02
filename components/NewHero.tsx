@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 function NewHero() {
   return (
-    <div className="grid h-[70vh] w-full  overflow-hidden px-3 py-2 md:h-[92.5vh] md:grid-cols-2">
+    <div className="grid h-[90vh] w-full  overflow-hidden px-3 py-2 md:h-[92.5vh] md:grid-cols-2">
       <div className=" flex w-full flex-col items-center justify-center gap-3 text-justify md:gap-5">
         <h1 className="text-3xl md:text-4xl">
           Welcome to{" "}
@@ -12,10 +12,10 @@ function NewHero() {
             Taste-Trail
           </span>
         </h1>
-        <p className=" md:leading-widest text-xl text-muted-foreground md:w-3/4 md:text-xl">
-          Embark on a culinary journey with Taste Trail! Explore an enticing
-          array of flavors, from cherished classics to daring innovations, all
-          conveniently delivered to your doorstep. Join us today!
+        <p className="text-xl tracking-tight text-muted-foreground md:w-3/4 md:text-xl md:leading-tight">
+          Embark on a tasty journey with Taste Trail! Explore a variety of
+          delicious flavors, from old favorites to exciting new ones, all
+          delivered straight to your door.
         </p>
 
         <div className="mb-5 flex gap-5">

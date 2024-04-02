@@ -4,7 +4,7 @@ import { SkeletonCard } from "@/components/SkeletionCard";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="relative ml-3 h-full w-full  bg-neutral-200 lg:pt-4">
+    <section className="relative h-full w-full bg-neutral-200  md:ml-3 lg:pt-4">
       <Suspense fallback={<SkeletonCard />}>
         <FindTaste />
       </Suspense>
