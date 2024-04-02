@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 
 import { IMenuItem } from "@/types/types";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
 
 async function DessertsPage({
   searchParams,
