@@ -1,6 +1,6 @@
 export const getOrder = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/order", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST}/api/order`, {
       cache: "no-store",
     });
 

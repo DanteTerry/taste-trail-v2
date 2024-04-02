@@ -24,6 +24,7 @@ export interface IOrder {
 
 async function OrdersPage() {
   const orders: IOrder[] = await getOrder();
+  console.log(orders);
 
   return (
     <div className="container  w-full bg-neutral-100 py-10">

@@ -11,7 +11,7 @@ interface CartItemProps {
 }
 
 const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const { _id, name, price, image, cuisine, quantity } = item;
+  const { _id, name, price, images, cuisine, quantity } = item;
 
   if (!_id) throw new Error("Item id is required");
 
@@ -39,7 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3 ">
         <Image
-          src={image}
+          src={images}
           alt="Food"
           width={100}
           height={100}

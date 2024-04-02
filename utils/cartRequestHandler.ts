@@ -2,12 +2,9 @@ import { IMenuItem } from "@/types/types";
 
 export const getCartItems = async (): Promise<IMenuItem[]> => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_LOCALHOST || "http://localhost:3000/"}/api/cart`,
-      {
-        cache: "no-store",
-      },
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST}/api/cart`, {
+      cache: "no-store",
+    });
 
     const data = await res.json();
 
@@ -20,16 +17,13 @@ export const getCartItems = async (): Promise<IMenuItem[]> => {
 
 export const createCartItems = async (item: IMenuItem) => {
   try {
-    const res = await fetch(
-      `${process.env.LOCALHOST || "http://localhost:3000/"}/api/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
+    const res = await fetch(`${process.env.LOCALHOST}/api/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(item),
+    });
 
     const data = await res.json();
 
@@ -42,6 +36,8 @@ export const createCartItems = async (item: IMenuItem) => {
 // get the response from the stripe hook
 
 export const getHookResponse = async () => {
-  const res = await fetch(`http://localhost:3000/api/order/webhook`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_LOCALHOST}/api/order/webhook`,
+  );
   return res;
 };

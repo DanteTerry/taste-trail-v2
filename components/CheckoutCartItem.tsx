@@ -11,7 +11,7 @@ function CheckoutCartItem({
   cartItem: IMenuItem;
   handleDelete: (id: string) => void;
 }) {
-  const { _id, name, price, image, cuisine, quantity } = cartItem;
+  const { _id, name, price, images, cuisine, quantity } = cartItem;
 
   function handleDeleteButton() {
     handleDelete(_id as string);
@@ -21,7 +21,7 @@ function CheckoutCartItem({
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
         <Image
-          src={image}
+          src={images}
           alt="Food"
           width={100}
           height={100}

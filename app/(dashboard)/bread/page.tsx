@@ -1,8 +1,9 @@
 import { getData } from "@/actions/actions";
 import Card from "@/components/Card";
+
 import { IMenuItem } from "@/types/types";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 async function DessertsPage({
   searchParams,

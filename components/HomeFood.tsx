@@ -12,13 +12,13 @@ function HomeFood() {
   const setMenu = useMenuStore((state) => state.setMenu);
   const homeMenu = useMenuStore((state) => state.menu);
 
-  const fetchMenu = async () => {
-    const res = await getMenu();
-    setMenu(res);
-  };
   useEffect(() => {
+    const fetchMenu = async () => {
+      const res = await getMenu();
+      setMenu(res);
+    };
     fetchMenu();
-  }, []);
+  }, [setMenu]);
 
   const homeMenuData = homeMenu.slice(0, 4);
 

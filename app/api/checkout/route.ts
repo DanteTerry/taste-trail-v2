@@ -26,7 +26,7 @@ export const POST = async (req: any) => {
       if (stripeProduct === undefined) {
         const prod = await stripe.products.create({
           name: item.name,
-          images: [item.image],
+          images: [item.images],
           default_price_data: {
             currency: "czk",
             unit_amount: item.price * 100,

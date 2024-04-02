@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SkeletonCard } from "./SkeletionCard";
+import { cn } from "@/lib/utils";
 
 function FindTaste() {
   const searchParams = useSearchParams();
@@ -55,7 +57,7 @@ function FindTaste() {
   }, [query, router, pathName, sort, cuisine, rating]);
 
   return (
-    <section className="fixed  top-[70px] mx-auto flex w-full flex-col items-center gap-y-5 border-t-0 bg-white py-2  md:grid md:grid-cols-2 md:gap-x-10 md:border-b md:px-4 lg:w-[91vw]">
+    <section className="fixed top-[70px] z-30 mx-auto flex w-full flex-col items-center gap-y-5 border-t-0 bg-white py-2  md:grid md:grid-cols-2 md:gap-x-10 md:border-b md:px-4 lg:w-[91vw]">
       <div className="flex w-full items-center border-b-2 px-4  py-1 text-primary  md:border-b-0  md:border-r ">
         <Search size={"25"} />
 
@@ -68,7 +70,7 @@ function FindTaste() {
         />
       </div>
 
-      <div className="flex w-full items-center gap-1 px-3 md:gap-4">
+      <div className={cn("flex w-full items-center gap-1 px-3 md:gap-4")}>
         <Select onValueChange={(value) => setSort(value)}>
           <SelectTrigger className="w-full border border-primary font-semibold text-primary outline-none">
             <SelectValue placeholder={"Sort"} />
@@ -80,18 +82,20 @@ function FindTaste() {
           </SelectContent>
         </Select>
 
-        <Select onValueChange={(value) => setCuisine(value)}>
-          <SelectTrigger className="w-full border border-primary font-semibold text-primary outline-none">
-            <SelectValue placeholder={"Cuisines"} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Italian">Italian</SelectItem>
-            <SelectItem value="Mexican">Mexican</SelectItem>
-            <SelectItem value="Czech">Czech</SelectItem>
-            <SelectItem value="Indian">Indian</SelectItem>
-            <SelectItem value="Japanese">Japanese</SelectItem>
-          </SelectContent>
-        </Select>
+        {pathName === "main" && (
+          <Select onValueChange={(value) => setCuisine(value)}>
+            <SelectTrigger className="w-full border border-primary font-semibold text-primary outline-none">
+              <SelectValue placeholder={"Cuisines"} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Italian">Italian</SelectItem>
+              <SelectItem value="Mexican">Mexican</SelectItem>
+              <SelectItem value="Czech">Czech</SelectItem>
+              <SelectItem value="Indian">Indian</SelectItem>
+              <SelectItem value="Japanese">Japanese</SelectItem>
+            </SelectContent>
+          </Select>
+        )}
 
         <Select onValueChange={(value) => setRating(value)}>
           <SelectTrigger className="w-full border border-primary font-semibold text-primary outline-none">

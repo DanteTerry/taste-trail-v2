@@ -3,7 +3,8 @@ import { UserModel } from "@/models/UserModel";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcryptjs from "bcryptjs";
-import { AuthOptions } from "next-auth";
+import { Account, AuthOptions, Profile, User } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -59,11 +60,13 @@ export const authOptions: AuthOptions = {
       account,
       profile,
     }: {
-      user: any;
-      account: any;
-      profile: any;
-    }) {
-      if (account.provider === "google") {
+      user: User | AdapterUser;
+      account: Account | null;
+      profile?: Profile | undefined;
+      email?: { verificationRequest?: boolean } | undefined;
+      credentials?: Record<string, unknown> | undefined;
+    }): Promise<any | boolean> {
+      if (account?.provider === "google") {
         try {
           const { name, email } = user;
           await connectDB();

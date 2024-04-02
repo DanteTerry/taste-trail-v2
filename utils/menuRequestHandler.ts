@@ -1,6 +1,6 @@
 export const getMenu = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/menu`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST}/api/menu`, {
       cache: "no-store",
     });
     const data = await res.json();
