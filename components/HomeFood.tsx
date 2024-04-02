@@ -32,7 +32,6 @@ function HomeFood() {
         {cuisineImg?.map((cuisine, index) => (
           <div key={index} className="relative flex justify-between">
             <Image
-              key={index}
               src={`/icons/${cuisine}.jpg`}
               alt={cuisine}
               height={0}

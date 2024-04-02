@@ -24,7 +24,6 @@ export interface IOrder {
 
 async function OrdersPage() {
   const orders: IOrder[] = await getOrder();
-  console.log(orders);
 
   return (
     <div className="container  w-full bg-neutral-100 py-10">
@@ -32,11 +31,11 @@ async function OrdersPage() {
         Your Orders
       </h1>
       <div
-        className="mt-10 grid grid-cols-1 place-items-center gap-y-5
+        className="mb-10 mt-10 grid grid-cols-1 place-items-center gap-y-5 md:mb-0
        md:grid-cols-2 lg:grid-cols-3"
       >
-        {orders?.map((order: IOrder, index: number) => (
-          <OrdersCard key={index} orderData={order} />
+        {orders?.map((order: IOrder) => (
+          <OrdersCard key={order._id} orderData={order} />
         ))}
       </div>
     </div>

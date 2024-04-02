@@ -108,7 +108,7 @@ function Cart() {
                 Cart is empty
               </h3>
             ) : (
-              cart.map((item, index) => <CartItem key={index} item={item} />)
+              cart.map((item, index) => <CartItem key={item._id} item={item} />)
             )}
           </div>
         )}

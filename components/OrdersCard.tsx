@@ -31,7 +31,7 @@ function OrdersCard({ orderData }: { orderData: IOrder }) {
           order id: {`#${orderData.orderId}`}
         </Badge>
 
-        <Badge className="bg-primary capitalize">{"status : Preparing"}</Badge>
+        <Badge className="bg-primary capitalize">{"status : Delivered"}</Badge>
       </div>
 
       <div
@@ -41,9 +41,9 @@ function OrdersCard({ orderData }: { orderData: IOrder }) {
             "overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-primary",
         )}
       >
-        {orderData.orderItems.map((item: IMenuItem, index: number) => (
+        {orderData.orderItems.map((item: IMenuItem) => (
           <>
-            <OrderItem key={index} item={item} />
+            <OrderItem key={item._id} item={item} />
             <Separator />
           </>
         ))}
