@@ -167,7 +167,6 @@ function Cart() {
                   placeholder="Phone"
                   className="rounded-lg border-2 border-neutral-200 p-3"
                   {...register("phone", { required: true })}
-                  defaultValue={8840320906}
                 />
                 {errors.phone && (
                   <span className="text-red-500">This field is required</span>
@@ -177,33 +176,39 @@ function Cart() {
                   placeholder="Address line"
                   className="rounded-lg border-2 border-neutral-200 p-3"
                   {...register("address", { required: true })}
-                  defaultValue={"buddheshwar"}
                 />
                 {errors.address && (
                   <span className="text-red-500">This field is required</span>
                 )}
 
                 <div className="flex gap-3">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="w-1/2 rounded-lg border-2 border-neutral-200 p-3"
-                    {...register("city", { required: true })}
-                    defaultValue={"lucknow"}
-                  />
-                  {errors.city && (
-                    <span className="text-red-500">This field is required</span>
-                  )}
-                  <input
-                    type="text"
-                    placeholder="Pin code"
-                    className="w-1/2 rounded-lg border-2 border-neutral-200 p-3"
-                    {...register("pinCode", { required: true })}
-                    defaultValue={226001}
-                  />
-                  {errors.pinCode && (
-                    <span className="text-red-500">This field is required</span>
-                  )}
+                  <div className="flex w-full flex-col">
+                    <input
+                      type="text"
+                      placeholder="City"
+                      className="w-full rounded-lg border-2 border-neutral-200 p-3"
+                      {...register("city", { required: true })}
+                    />
+                    {errors.city && (
+                      <span className="text-red-500">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex w-full flex-col">
+                    <input
+                      type="text"
+                      placeholder="Pin code"
+                      className="w-full rounded-lg border-2 border-neutral-200 p-3"
+                      {...register("pinCode", { required: true })}
+                    />
+                    {errors.pinCode && (
+                      <span className="text-red-500">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 

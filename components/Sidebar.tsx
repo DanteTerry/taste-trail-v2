@@ -9,18 +9,21 @@ function Sidebar({ className }: { className?: string }) {
   const pathName = usePathname();
   return (
     <div
-      className={cn("col-span-1   lg:block  py-4 border-r-2 px-5", className)}
+      className={cn(
+        "col-span-1  h-3/4  border-r-2  px-5 py-4 lg:block",
+        className,
+      )}
     >
-      <div className="flex w-full items-center gap-6 flex-col">
+      <div className="my-auto flex  w-full flex-col items-center justify-between gap-6">
         {sideBarLinks.map((link) => (
           <Link
             href={link.href}
             key={link.href}
             className={cn(
-              "flex flex-col rounded-lg w-full items-center  transition-all  text-[#828487]  text-4xl p-2",
+              "flex w-full flex-col items-center rounded-lg  p-2  text-4xl  text-[#828487] transition-all",
               pathName === link.href
                 ? "bg-primary text-white"
-                : "hover:bg-neutral-200"
+                : "hover:bg-neutral-200",
             )}
           >
             <link.icon size={"36"} />
