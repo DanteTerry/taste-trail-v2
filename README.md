@@ -120,7 +120,7 @@ STRIPE_WEBHOOK_SECRET=
 
 ```
 
-Replace the placeholder values with your actual respective account credentials. You can obtain these credentials by signing up on the [GOOGLE](https://console.cloud.google.com), [MongoDB](https://www.mongodb.com/), [Cloudinary](https://cloudinary.com/) and [Stripe](https://stripe.com)
+Replace the placeholder values with your actual respective account credentials. You can obtain these credentials by signing up on the [Google](https://console.cloud.google.com), [MongoDB](https://www.mongodb.com/), [Cloudinary](https://cloudinary.com/) and [Stripe](https://stripe.com)
 
 **Running the Project**
 
