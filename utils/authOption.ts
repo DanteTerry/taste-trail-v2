@@ -90,6 +90,10 @@ export const authOptions: AuthOptions = {
           console.log(error.message);
         }
       }
+
+      if (account?.provider === "credentials") {
+        return user;
+      }
       return false;
     },
 
