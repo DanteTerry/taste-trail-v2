@@ -1,8 +1,11 @@
-export const getOrder = async () => {
+export const getOrder = async (id: any) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST}/api/order`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST}/api/order/${id}`,
+      {
+        cache: "no-store",
+      },
+    );
 
     const data = await res.json();
     return data;

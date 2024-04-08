@@ -1,14 +1,8 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/constants/constant";
-
-import Cart from "./Cart";
 
 function NavLinks() {
   const pathname = usePathname();
@@ -28,6 +22,15 @@ function NavLinks() {
           </Link>
         </li>
       ))}
+      {/* <Link
+        className={cn(
+          "flex gap-2 transition-all duration-300 hover:text-neutral-600",
+          pathname === "/admin" && "text-primary hover:text-primary",
+        )}
+        href={"/admin"}
+      >
+        <UserCog /> Admin
+      </Link> */}
     </nav>
   );
 }

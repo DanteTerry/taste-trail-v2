@@ -5,6 +5,11 @@ import { IMenuItem } from "@/types/types";
 import Link from "next/link";
 import React from "react";
 
+interface IFoodItem {
+  mainCourse: IMenuItem[];
+  totalPage: number;
+}
+
 async function FoodPage({
   searchParams,
 }: {
@@ -18,7 +23,7 @@ async function FoodPage({
   const cuisine = searchParams.cuisine as string | undefined;
   const rating = searchParams.rating as string | undefined;
 
-  const mainCourse: IMenuItem[] = await getData({
+  const foodItem: IFoodItem = await getData({
     category: "Main Course",
     page,
     limit,
@@ -28,8 +33,9 @@ async function FoodPage({
     rating,
   });
 
-  let data: number = 16 - mainCourse.length;
+  const { mainCourse, totalPage } = foodItem;
 
+  console.log(totalPage);
   return (
     <section className="h-full bg-neutral-200 pt-24 md:py-10">
       <div className="mx-auto flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">
@@ -38,7 +44,7 @@ async function FoodPage({
         ))}
       </div>
 
-      {mainCourse.length > 0 && (
+      {totalPage > page && (
         <div className="mt-12 flex justify-center gap-10">
           <Link
             className={cn(

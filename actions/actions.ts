@@ -76,5 +76,18 @@ export const getData = async ({
 
   data = JSON.parse(JSON.stringify(data));
 
-  return data;
+  // Count the total properties based on the entire pipeline
+  const menuItemPipeLine = [...pipeline];
+  menuItemPipeLine.pop(); // Remove the $limit stage
+  const totalMenuItem = await MenuItemModel.aggregate([
+    ...menuItemPipeLine,
+    { $count: "total" },
+  ]);
+
+  const totalPage = Math.ceil(totalMenuItem[0]?.total / limit);
+
+  return {
+    mainCourse: data,
+    totalPage,
+  };
 };

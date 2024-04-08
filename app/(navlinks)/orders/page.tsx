@@ -1,6 +1,7 @@
 import OrdersCard from "@/components/OrdersCard";
 import { IMenuItem } from "@/types/types";
 import { getOrder } from "@/utils/orderRequestHandler";
+import Image from "next/image";
 import React from "react";
 
 export interface IOrder {
@@ -23,15 +24,31 @@ export interface IOrder {
 }
 
 async function OrdersPage() {
-  const orders: IOrder[] = await getOrder();
+  // const orders: IOrder[] = await getOrder("6605c0b48c0ef197d7a8a2e6");
+
+  const orders: [] = [];
 
   return (
-    <div className="container  w-full bg-neutral-100 py-10">
+    <div className="container  h-[90vh] w-full bg-neutral-100 py-10">
       <h1 className="text-center text-4xl font-semibold  text-primary ">
         Your Orders
       </h1>
+      {orders.length === 0 && (
+        <div className="mt-5 flex flex-col items-center">
+          <h1 className="text-center text-2xl font-semibold text-black">
+            No Orders Found
+          </h1>
+
+          <Image
+            src={"/icons/no-order.svg"}
+            alt="no order graphic"
+            width={330}
+            height={330}
+          />
+        </div>
+      )}
       <div
-        className="mb-10 mt-10 grid grid-cols-1 place-items-center gap-y-5 md:mb-0
+        className="mb-10 mt-10 grid w-full grid-cols-1 place-items-center gap-y-5 md:mb-0
        md:grid-cols-2 lg:grid-cols-3"
       >
         {orders?.map((order: IOrder) => (

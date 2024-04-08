@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SignInSchema } from "@/lib/validation";
 import { TSignIn } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -13,12 +13,23 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 function SignInPage() {
   const {
     register,
+
     formState: { errors, isSubmitting },
     handleSubmit,
     reset,
   } = useForm<TSignIn>({
     resolver: zodResolver(SignInSchema),
   });
+
+  const { data: session } = useSession();
+
+  if (session) {
+    return (
+      <div className="flex items-center justify-center">
+        <h2 className="text-3xl text-primary">You are already signed in</h2>
+      </div>
+    );
+  }
 
   const onsubmit = async (data: TSignIn) => {
     const user = {
@@ -31,6 +42,10 @@ function SignInPage() {
       email: user.email,
       password: user.password,
     });
+
+    if (res?.ok) {
+      reset();
+    }
 
     if (res?.error) {
       toast("Invalid Email or Password");

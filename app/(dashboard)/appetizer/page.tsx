@@ -2,7 +2,12 @@ import { getData } from "@/actions/actions";
 import Card from "@/components/Card";
 import { IMenuItem } from "@/types/types";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
+
+interface IFoodItem {
+  mainCourse: IMenuItem[];
+  totalPage: number;
+}
 
 async function AppetizerPage({
   searchParams,
@@ -17,7 +22,7 @@ async function AppetizerPage({
   const cuisine = searchParams.cuisine as string | undefined;
   const rating = searchParams.rating as string | undefined;
 
-  const mainCourse: IMenuItem[] = await getData({
+  const appetizerItem: IFoodItem = await getData({
     category: "Appetizers",
     page,
     limit,
@@ -27,6 +32,8 @@ async function AppetizerPage({
     rating,
   });
 
+  const { mainCourse, totalPage } = appetizerItem;
+
   return (
     <section className="h-full bg-neutral-200 pt-24 md:py-10">
       <div className="mx-auto flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">
@@ -35,7 +42,7 @@ async function AppetizerPage({
         ))}
       </div>
 
-      {mainCourse.length > 0 && (
+      {totalPage > page && (
         <div className="mt-12 flex justify-center gap-10">
           <Link
             className="rounded-lg bg-primary px-5 py-2 text-lg text-white"

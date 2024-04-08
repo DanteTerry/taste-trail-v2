@@ -12,9 +12,8 @@ import { useForm } from "react-hook-form";
 import { IMenuItem } from "@/types/types";
 import { getUser } from "@/utils/userRequestHandler";
 
-// user type from data coming from database
-
-interface IUser {
+// user type for data coming from database
+export interface IUser {
   _id: string;
   name: string;
   email: string;
@@ -132,7 +131,7 @@ function Cart() {
               <div className="flex justify-between text-lg md:mt-3">
                 <h3 className="text-lg font-semibold text-black">Total</h3>
                 <p className="font-semibold text-primary ">
-                  ₹ {subtotal + tax}
+                  czk {subtotal + tax}
                 </p>
               </div>
             </div>

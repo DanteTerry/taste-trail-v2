@@ -101,6 +101,7 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.email = user.email;
         token.name = user.name;
+        token.id = user.id;
       }
       return token;
     },
@@ -109,6 +110,7 @@ export const authOptions: AuthOptions = {
       if (session.user) {
         session.user.email = token.email;
         session.user.name = token.name;
+        session.user.id = token.id;
       }
       return session;
     },

@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 
 import { SiBuymeacoffee } from "react-icons/si";
-import { GiSlicedBread } from "react-icons/gi";
 import { IoFastFoodOutline } from "react-icons/io5";
 
 // Define an interface for navigation links
@@ -30,6 +29,7 @@ export const navLinks: NavLinkProps[] = [
     label: "Home", // Label for the home link
     icon: Home, // Home icon component
   },
+
   {
     href: "/orders", // Order page URL
     label: "Orders", // Label for the order link

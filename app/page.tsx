@@ -1,4 +1,3 @@
-import Hero from "@/components/Hero";
 import HomeFood from "@/components/HomeFood";
 import NewHero from "@/components/NewHero";
 
