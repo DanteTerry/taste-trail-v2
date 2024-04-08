@@ -10,7 +10,7 @@ interface CardProps {
 }
 
 function Card({ menuData }: CardProps) {
-  const { name, images, price, rating, description, cuisine } = menuData;
+  const { name, images, price, rating, description } = menuData;
 
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);

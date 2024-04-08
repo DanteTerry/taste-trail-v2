@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 function NewHero() {
   return (
@@ -19,12 +20,14 @@ function NewHero() {
         </p>
 
         <div className="mb-5 flex gap-5">
-          <Button
-            size={"lg"}
-            className="rounded-lg bg-primary px-8 py-3 text-white md:text-lg"
-          >
-            Order Now
-          </Button>
+          <Link href={"/main"}>
+            <Button
+              size={"lg"}
+              className="rounded-lg bg-primary px-8 py-3 text-white md:text-lg"
+            >
+              Order Now
+            </Button>
+          </Link>
 
           <Button
             size={"lg"}

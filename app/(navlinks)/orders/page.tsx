@@ -1,6 +1,9 @@
 import OrdersCard from "@/components/OrdersCard";
 import { IMenuItem } from "@/types/types";
+import { authOptions } from "@/utils/authOption";
 import { getOrder } from "@/utils/orderRequestHandler";
+import { getServerSession } from "next-auth";
+
 import Image from "next/image";
 import React from "react";
 
@@ -19,21 +22,22 @@ export interface IOrder {
     city: string;
     pinCode: string;
   };
-
   createdAt: string;
 }
 
 async function OrdersPage() {
-  // const orders: IOrder[] = await getOrder("6605c0b48c0ef197d7a8a2e6");
+  const session = await getServerSession(authOptions);
 
-  const orders: [] = [];
+  const userId = session?.user.id;
+
+  const orders: IOrder[] | [] = await getOrder(userId);
 
   return (
     <div className="container  h-[90vh] w-full bg-neutral-100 py-10">
       <h1 className="text-center text-4xl font-semibold  text-primary ">
         Your Orders
       </h1>
-      {orders.length === 0 && (
+      {orders?.length === 0 && (
         <div className="mt-5 flex flex-col items-center">
           <h1 className="text-center text-2xl font-semibold text-black">
             No Orders Found

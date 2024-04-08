@@ -69,10 +69,14 @@ export const authOptions: AuthOptions = {
       if (account?.provider === "google") {
         try {
           const { name, email } = user;
+
           await connectDB();
           const ifUserExist = await UserModel.findOne({ email });
+          console.log("Exist", ifUserExist);
 
           if (ifUserExist) {
+            user.id = ifUserExist?._id;
+
             return user;
           }
 
@@ -101,7 +105,7 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.email = user.email;
         token.name = user.name;
-        token.id = user.id;
+        token.id = user.id || user._id;
       }
       return token;
     },
@@ -110,8 +114,9 @@ export const authOptions: AuthOptions = {
       if (session.user) {
         session.user.email = token.email;
         session.user.name = token.name;
-        session.user.id = token.id;
+        session.user.id = token.id || token._id;
       }
+
       return session;
     },
   },
