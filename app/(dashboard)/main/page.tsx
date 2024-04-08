@@ -39,6 +39,11 @@ async function FoodPage({
   return (
     <section className="h-full bg-neutral-200 pt-24 md:py-10">
       <div className="mx-auto flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">
+        {mainCourse.length === 0 && (
+          <div className="w-full text-center text-2xl font-bold">
+            No data found
+          </div>
+        )}
         {mainCourse.map((item: IMenuItem) => (
           <Card key={item._id} menuData={item} />
         ))}

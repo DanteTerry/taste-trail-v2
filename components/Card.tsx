@@ -4,24 +4,24 @@ import { Button } from "./ui/button";
 import { IMenuItem } from "@/types/types";
 import { useCartStore } from "@/lib/store/cart-store";
 import { useMenuStore } from "@/lib/store/menu-store";
-import { Badge } from "./ui/badge";
 
 interface CardProps {
   menuData: IMenuItem;
 }
 
 function Card({ menuData }: CardProps) {
-  const { name, images, price, rating, description, cuisine, isInCart } =
-    menuData;
+  const { name, images, price, rating, description, cuisine } = menuData;
 
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
   const changeMenu = useMenuStore((state) => state.changeMenu);
 
+  const isInCart = cart.some((item: IMenuItem) => item._id === menuData._id);
+
   function handleAddToCart() {
     const InCart = cart.some((item: IMenuItem) => item._id === menuData._id);
+
     if (InCart) return;
-    changeMenu({ ...menuData, isInCart: true });
     addToCart(menuData);
   }
 
