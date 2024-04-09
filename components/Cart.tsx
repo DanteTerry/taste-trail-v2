@@ -4,12 +4,11 @@ import CartItem from "./CartItem";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { SheetClose } from "@/components/ui/sheet";
+
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useCartStore } from "@/lib/store/cart-store";
 import { useForm } from "react-hook-form";
-import { IMenuItem } from "@/types/types";
 import { getUser } from "@/utils/userRequestHandler";
 
 // user type for data coming from database

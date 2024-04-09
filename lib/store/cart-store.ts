@@ -9,6 +9,7 @@ type TCart = {
   removeFromCart: (item: IMenuItem) => void;
   increaseQuantity: (item: IMenuItem) => void;
   decreaseQuantity: (item: IMenuItem) => void;
+  setCart: (cart: IMenuItem[]) => void;
 };
 
 export const useCartStore = create<TCart>()(

@@ -27,8 +27,8 @@ export interface IOrder {
 
 async function OrdersPage() {
   const session = await getServerSession(authOptions);
-
-  const userId = session?.user?.id;
+  // @ts-ignore
+  const userId = session?.user?.id ?? null;
 
   const orders: IOrder[] | [] = await getOrder(userId);
 
