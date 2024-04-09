@@ -6,12 +6,14 @@ import { TSignUp } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { toast } from "sonner";
 
 function SignUpPage() {
+  const router = useRouter();
   const {
     register,
     formState: { errors, isSubmitting },
@@ -39,6 +41,7 @@ function SignUpPage() {
 
       if (response.ok) {
         toast("Account created successfully");
+        router.push("/signin");
       } else {
         throw new Error("An error occurred");
       }

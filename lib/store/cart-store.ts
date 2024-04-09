@@ -43,6 +43,7 @@ export const useCartStore = create<TCart>()(
           }),
         }));
       },
+      setCart: (cart: IMenuItem[]) => set({ cart }),
     }),
     {
       name: "cart",

@@ -89,7 +89,9 @@ function SignInPage() {
               placeholder="Enter your email"
               className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
               {...register("email")}
+              defaultValue={"johndoe@gmail.com"}
             />
+
             {errors.email && (
               <p className="text-sm text-red-500">{errors.email.message}</p>
             )}
@@ -105,6 +107,7 @@ function SignInPage() {
               placeholder="Enter your password"
               className="w-full rounded-md border-2 border-primary/50 p-2 py-3 text-lg text-primary outline-none"
               {...register("password")}
+              defaultValue={"asdfghjkl"}
             />
             {errors.password && (
               <p className="text-sm text-red-500">{errors.password.message}</p>

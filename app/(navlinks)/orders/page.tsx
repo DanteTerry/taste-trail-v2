@@ -28,12 +28,12 @@ export interface IOrder {
 async function OrdersPage() {
   const session = await getServerSession(authOptions);
 
-  const userId = session?.user.id;
+  const userId = session?.user?.id;
 
   const orders: IOrder[] | [] = await getOrder(userId);
 
   return (
-    <div className="container  h-[90vh] w-full bg-neutral-100 py-10">
+    <div className="container  h-full w-full bg-neutral-100 py-10">
       <h1 className="text-center text-4xl font-semibold  text-primary ">
         Your Orders
       </h1>

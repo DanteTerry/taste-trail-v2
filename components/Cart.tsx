@@ -25,6 +25,7 @@ export interface IUser {
 
 function Cart() {
   const cart = useCartStore((state) => state.cart);
+  const setCart = useCartStore((state) => state.setCart);
   const { data: session } = useSession();
 
   const {
@@ -82,7 +83,10 @@ function Cart() {
 
       const data = await res.json();
 
-      if (data.url) router.push(data.url);
+      if (data.url) {
+        router.push(data.url);
+        setCart([]);
+      }
     } catch (error) {
       console.error("An error occurred during payment:", error);
     }

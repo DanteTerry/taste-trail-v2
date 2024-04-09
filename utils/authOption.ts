@@ -88,6 +88,7 @@ export const authOptions: AuthOptions = {
 
           const userNew = await UserModel.create(newUser);
           if (userNew.name === name) {
+            user.id = userNew._id;
             return user;
           }
         } catch (error: any) {
