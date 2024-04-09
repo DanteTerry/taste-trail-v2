@@ -72,7 +72,6 @@ export const authOptions: AuthOptions = {
 
           await connectDB();
           const ifUserExist = await UserModel.findOne({ email });
-          console.log("Exist", ifUserExist);
 
           if (ifUserExist) {
             user.id = ifUserExist?._id;

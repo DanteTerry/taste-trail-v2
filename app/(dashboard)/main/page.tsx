@@ -35,7 +35,6 @@ async function FoodPage({
 
   const { mainCourse, totalPage } = foodItem;
 
-  console.log(totalPage);
   return (
     <section className="h-full bg-neutral-200 pt-24 md:py-10">
       <div className="mx-auto flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">

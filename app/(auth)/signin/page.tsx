@@ -9,8 +9,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { AiFillGoogleCircle } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 function SignInPage() {
+  const router = useRouter();
   const {
     register,
 
@@ -45,6 +47,7 @@ function SignInPage() {
 
     if (res?.ok) {
       reset();
+      router.push("/");
     }
 
     if (res?.error) {
@@ -65,7 +68,11 @@ function SignInPage() {
         <div className="w-full text-center md:w-3/4">
           <Button
             className="w-full rounded-md border-2 border-primary bg-white p-2 py-4 text-lg text-primary hover:bg-white"
-            onClick={() => signIn("google")}
+            onClick={async () => {
+              const res = await signIn("google");
+
+              console.log(res);
+            }}
           >
             Sign In with Google{" "}
             <AiFillGoogleCircle className=" ml-2 text-2xl" />
