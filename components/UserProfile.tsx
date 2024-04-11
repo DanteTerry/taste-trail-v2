@@ -34,9 +34,6 @@ function UserProfile() {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <button>Profile</button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
               <button onClick={() => signOut()}>Sign Out</button>
             </DropdownMenuItem>
           </DropdownMenuContent>

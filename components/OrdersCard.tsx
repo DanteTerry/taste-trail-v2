@@ -23,7 +23,6 @@ function OrdersCard({ orderData }: { orderData: IOrder }) {
     return acc + item.price * item.quantity;
   }, 0);
 
-  console.log(orderData.orderItems);
   const tax = subtotal * 0.1;
   return (
     <div className="w-[350px] rounded-xl border bg-white px-4 py-4 shadow-md">
