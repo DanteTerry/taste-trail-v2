@@ -38,6 +38,7 @@ Rest assured with a secure payment gateway for safe and hassle-free payments. Wh
 
 - Next.js
 - TypeScript
+- Zustand
 - MongoDB
 - NextAuth
 - Cloudinary
