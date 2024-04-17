@@ -42,7 +42,7 @@ async function PizzasPage({
       </div>
 
       {totalPage > page && (
-        <div className="mt-12 flex justify-center gap-10">
+        <div className="mt-12 flex justify-center gap-10 pb-20">
           <Link
             className="rounded-lg bg-primary px-5 py-2 text-lg text-white"
             href={{

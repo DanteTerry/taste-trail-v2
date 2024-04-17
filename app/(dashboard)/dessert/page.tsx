@@ -35,15 +35,15 @@ async function DessertsPage({
   const { mainCourse, totalPage } = dessertItem;
 
   return (
-    <section className="h-full bg-neutral-200 pt-24 md:py-10">
-      <div className="mx-auto flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">
+    <section className="h-full bg-neutral-200 pb-20 pt-24 md:py-10">
+      <div className="mx-auto  flex w-[95%] flex-wrap items-center gap-x-8  gap-y-8">
         {mainCourse.map((item: IMenuItem) => (
           <Card key={item._id} menuData={item} />
         ))}
       </div>
 
       {totalPage > page && (
-        <div className="mt-12 flex justify-center gap-10">
+        <div className="mt-12 flex justify-center gap-10 pb-20">
           <Link
             className="rounded-lg bg-primary px-5 py-2 text-lg text-white"
             href={{
