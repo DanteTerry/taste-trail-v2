@@ -22,15 +22,6 @@ function NavLinks() {
           </Link>
         </li>
       ))}
-      {/* <Link
-        className={cn(
-          "flex gap-2 transition-all duration-300 hover:text-neutral-600",
-          pathname === "/admin" && "text-primary hover:text-primary",
-        )}
-        href={"/admin"}
-      >
-        <UserCog /> Admin
-      </Link> */}
     </nav>
   );
 }
