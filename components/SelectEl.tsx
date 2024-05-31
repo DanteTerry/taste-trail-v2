@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Select,
   SelectContent,
@@ -7,27 +7,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function SelectEl({
-  option,
-}: {
-  option: { placeHolder: string; value: string[]; title: string[] };
-}) {
+interface SelectElProps {
+  option: {
+    placeHolder: string;
+    value: string[];
+    title: string[];
+  };
+}
+
+const SelectEl: React.FC<SelectElProps> = ({ option }) => {
   return (
     <Select>
       <SelectTrigger className="w-full border border-primary font-semibold text-primary outline-none">
         <SelectValue placeholder={option.placeHolder} />
       </SelectTrigger>
       <SelectContent>
-        {option.title.map((title: string) => {
-          return (
-            <SelectItem value={title} key={title}>
-              {title}
-            </SelectItem>
-          );
-        })}
+        {option.title.map((title: string) => (
+          <SelectItem value={title} key={title}>
+            {title}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
-}
+};
 
 export default SelectEl;
