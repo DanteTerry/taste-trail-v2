@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SkeletonCard } from "./SkeletionCard";
+
 import { cn } from "@/lib/utils";
 
 function FindTaste() {
