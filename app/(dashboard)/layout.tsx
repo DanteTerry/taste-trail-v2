@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import FindTaste from "@/components/FindTaste";
-import { SkeletonCard } from "@/components/SkeletionCard";
+import SkeletonCard from "@/components/SkeletionCard";
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
